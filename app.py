@@ -46,11 +46,6 @@ DES['ESTIMATED TOTAL COST'] = DES['ESTIMATED TOTAL COST'].str.replace('.', '')
 DES['NORMALIZED TOTAL COST'] = DES['NORMALIZED TOTAL COST'].astype(str)
 DES['NORMALIZED TOTAL COST'] = DES['NORMALIZED TOTAL COST'].str.replace('.', '')
 
-"""## Concatenar bases
-
-Una vez renombradas, se procede a concatenar las tres bases con variables similares.
-"""
-
 # concatenar las bases
 CON = pd.concat([AH, MOR, ROC])
 
@@ -73,11 +68,8 @@ CONS = CON.loc[:, ['YEAR', 'GEO', 'performance_of_system', 'Incidents&Casualties
 # guardamos el df con las columnas definidas para ser analizadas de acuerdo con su contenido - para la base general de incendios
 DESA = DES.loc[:, ['EVENT GROUP', 'EVENT SUBGROUP', 'EVENT TYPE', 'EVENT START DATE', 'FATALITIES', 'INJURED / INFECTED', 'ESTIMATED TOTAL COST', 'NORMALIZED TOTAL COST', 'MAGNITUDE', 'PLACE']]
 
-"""## Homologación de categorías"""
 
-"""Encontramos que está Canadá y Fuerza armada Canadiense, por lo que se unen estas dos como Canadá."""
-
-# remplazar las categorías en GEO
+# remplazar las categorías en GEO -Homologacion
 CONS['GEO'] = CONS['GEO'].replace(['canadian armed forces'], 'canada')
 
 # reemplazar las categorías en EVENT GROUP
@@ -118,14 +110,8 @@ DESA.head()
 
 CONS.head()
 
-"""# **Transformaciones: Aplicación de funciones para la creación de nuevas variables**
 
-Aquí ponemos extraer el año, creando una nueva variable en la base "DESA" con la variable EVENT START DATE
-"""
-
-DESA.columns
-
-#Convertimos la columna "EVENT START DATE" a formato de datetime
+#Convertimos la columna "EVENT START DATE" a formato de datetime - TRANSFORMACIONES
 DESA['EVENT START DATE']=pd.to_datetime(DESA['EVENT START DATE'],errors='coerce')
 
 # Creamos las nuevas variables YEAR , MONTH , DAY 
@@ -151,7 +137,6 @@ DESA.head()
 
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
-DESA.columns
 
 """# **Análisis descriptivo sobre las bases individuales y su relación: Plantearse 9 preguntas que le ayuden a tener un entendimiento de la información recolectada y le permitan estar más cerca de concluir sobre el tema analizado. Dar  respuesta a estas preguntas a través de tablas y gráficos.**
 

@@ -230,7 +230,6 @@ figm.show()
 Gráfico de barras
 """
 
-incendios.columns
 
 import plotly.express as px
 
@@ -256,8 +255,6 @@ fig.show()
 # 6. ¿Cuál es el número de incendios por localidad?
 """
 
-CONS.columns
-
 incendios_por_localidad = CONS['GEO'].value_counts()
 df_incendios = pd.DataFrame({'Localidad': incendios_por_localidad.index, 'Número de Incendios': incendios_por_localidad.values})
 # Definir una lista de colores para las barras
@@ -274,18 +271,13 @@ fig.show()
 Se muestra en gráfico de torta para apreciar el comparativo.
 """
 
-DESA.columns
-#count_fire = DESA[DESA['EVENT SUBGROUP'] == 'fire']['EVENT SUBGROUP'].value_counts()
-#count_fire
-
 event_types = DESA['EVENT SUBGROUP'].unique()
-event_types
+
 
 event_types = DESA['EVENT TYPE'].unique()
-event_types
+
 
 fire_rows = DESA[(DESA['EVENT TYPE'] == 'residential') & (DESA['EVENT SUBGROUP'] == 'fire')]
-fire_rows
 
 residenciales = DESA[DESA['EVENT TYPE'] == 'residential'][DESA['EVENT SUBGROUP'] == 'fire']
 cantidad_residenciales = len(residenciales)
@@ -300,10 +292,7 @@ fig.show()
 # 8. ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente los rociadores?  tasa de efectividad= Total de incendios apagados por rociadoress/total de incendios
 """
 
-ROC.columns
-
 conteo_eventos = ROC['performance_of_system'].value_counts()
-conteo_eventos
 
 conteo_performance = ROC['performance_of_system'].value_counts()
 incendios_con_rociadores = conteo_performance['Sprinkler operated']
@@ -326,10 +315,8 @@ print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectivid
  tasa de efectividad: Total de incendios donde la alrma funcionó/total de incendios
 """
 
-AH.columns
 
 conteo_eventos = AH['performance_of_system'].value_counts()
-conteo_eventos
 
 conteo_performance = AH['performance_of_system'].value_counts()
 incendios_con_alarma = conteo_performance['Alarm activated']

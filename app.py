@@ -328,10 +328,10 @@ print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectivid
 
 AH.columns
 
-conteo_eventos = AH['Performance of smoke alarm device, residential fires'].value_counts()
+conteo_eventos = AH['performance_of_system'].value_counts()
 conteo_eventos
 
-conteo_performance = AH['Performance of smoke alarm device, residential fires'].value_counts()
+conteo_performance = AH['performance_of_system'].value_counts()
 incendios_con_alarma = conteo_performance['Alarm activated']
 incendios_sin_alarma = total_incendios - incendios_con_alarma
 data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [incendios_con_alarma, incendios_sin_alarma]}

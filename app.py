@@ -178,11 +178,7 @@ dataT = pd.DataFrame({'Año': cantidad_tormentas_por_año.index, 'Cantidad de to
 dataT.plot( 'Año' , 'Cantidad de tormentas' )
 # En comparación con la ocurrencia de incendios y la ocurrencia de inundaciones, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
 # A nivel general, puede decirse que el top 3 de desastres, conformado por inundaciones, tormentas e incendios, tienen una misma tendencia de comportamiento en el tiempo en cuanto a la cantidad de eventos ocurridos. Podría especularse, que a principios de siglo, quizá la ocurrencia haya sido similar, pero los datos no hayan quedado registrados, ya que la diferencia de la variación entre la frecuencia y cantidad de eventos a principio de siglo y a final de siglo, es bastante notoria.
-
-# **Finalmente, se revisa la cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
-"""
-
-eventos = ['fire', 'storm', 'flood']
+###Finalmente, se revisa la cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
 filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
 datos_filtrados = DESA[filtro_eventos]
 muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()

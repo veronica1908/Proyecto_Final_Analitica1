@@ -167,7 +167,6 @@ tabla_costo_promedio
 
 #2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?
 
-Representado en gráfico de torta.
 """
 
 import plotly.express as px
@@ -190,7 +189,6 @@ fig.show()
 """### Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
 
 # 3.  ¿Cuál es la cantidad de incendios por año?
-Se muestra un gráfico de lineas
 """
 
 #Filtramos los registros que corresponden a incendios
@@ -201,7 +199,7 @@ cantidad_incendios_por_año = incendios['YEAR'].value_counts().sort_index()
 
 data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Incendios': cantidad_incendios_por_año.values})
 
-data.plot( 'Año' , 'Cantidad de Incendios' )
+data.plotly( 'Año' , 'Cantidad de Incendios' )
 
 """### Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
 Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.

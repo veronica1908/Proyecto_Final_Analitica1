@@ -306,7 +306,6 @@ fig.show()
 # Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número simila3r de eventos correspondiente a 4440.#
 
 # 7. ¿Cuál es la distribución de los incendios (residenciales/no residenciales)?
-Se muestra en gráfico de torta para apreciar el comparativo.
 
 event_types = DESA['EVENT SUBGROUP'].unique()
 

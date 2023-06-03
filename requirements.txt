@@ -5,4 +5,4 @@ datetime
 openpyxl
 Pydeck
 numpy
-
+plotly.subplots

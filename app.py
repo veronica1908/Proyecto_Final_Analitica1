@@ -386,4 +386,4 @@ fig = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectivida
 
 fig.show()
 
-"""### El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.
+"""#El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""

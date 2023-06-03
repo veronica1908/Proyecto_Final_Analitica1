@@ -307,7 +307,7 @@ df_ocurrencia_incendios = df_ocurrencia_incendios.sort_values('Día de la semana
 fig = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', )
 fig.show()
 
-**"""Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles.**
+##Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles.
 
 # 6. ¿Cuál es el número de incendios por localidad?
 """

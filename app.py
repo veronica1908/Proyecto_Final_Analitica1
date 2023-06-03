@@ -284,7 +284,7 @@ figm.show()
 """### Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
 
 # 5. ¿Cómo es la distribución de ocurrencia de incendios por día de la semana?  
-Gráfico de barras
+
 """
 
 

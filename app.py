@@ -138,20 +138,17 @@ DESA.head()
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
-"""# **Desastres en Canadá: influencia sobre la población y un enfoque sobre los incendios**
+# **Desastres en Canadá: influencia sobre la población y un enfoque sobre los incendios**
 # **Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.**
-"""
 
 desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
 figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'})
 
 figd.show()
-
-"""### Dentro de la base general de desastres, se encuentra que el desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
+### Dentro de la base general de desastres, se encuentra que el desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
 
 # **Se realiza el ejercicio de ocurrencia de desastres por inundaciones por año**
-"""
 
 #Filtramos los registros que corresponden a inundaciones
 inundaciones = DESA[DESA['EVENT TYPE'] == 'flood']
@@ -163,10 +160,9 @@ dataI = pd.DataFrame({'Año': cantidad_Inundaciones_por_año.index, 'Cantidad de
 
 dataI.plot( 'Año' , 'Cantidad de Inundaciones' )
 
-"""### En comparación con la ocurrencia de incendios, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
+# En comparación con la ocurrencia de incendios, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
 
 # **Se realiza también el ejercicio de ocurrencia de desastres por tormentas por año para ver su comportamiento en el tiempo**
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -180,10 +176,8 @@ cantidad_tormentas_por_año = tormentas['YEAR'].value_counts().sort_index()
 dataT = pd.DataFrame({'Año': cantidad_tormentas_por_año.index, 'Cantidad de tormentas': cantidad_tormentas_por_año.values})
 
 dataT.plot( 'Año' , 'Cantidad de tormentas' )
-
-"""## En comparación con la ocurrencia de incendios y la ocurrencia de inundaciones, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
-
-## A nivel general, puede decirse que el top 3 de desastres, conformado por inundaciones, tormentas e incendios, tienen una misma tendencia de comportamiento en el tiempo en cuanto a la cantidad de eventos ocurridos. Podría especularse, que a principios de siglo, quizá la ocurrencia haya sido similar, pero los datos no hayan quedado registrados, ya que la diferencia de la variación entre la frecuencia y cantidad de eventos a principio de siglo y a final de siglo, es bastante notoria.
+# En comparación con la ocurrencia de incendios y la ocurrencia de inundaciones, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
+# A nivel general, puede decirse que el top 3 de desastres, conformado por inundaciones, tormentas e incendios, tienen una misma tendencia de comportamiento en el tiempo en cuanto a la cantidad de eventos ocurridos. Podría especularse, que a principios de siglo, quizá la ocurrencia haya sido similar, pero los datos no hayan quedado registrados, ya que la diferencia de la variación entre la frecuencia y cantidad de eventos a principio de siglo y a final de siglo, es bastante notoria.
 
 # **Finalmente, se revisa la cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
 """
@@ -196,11 +190,9 @@ df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de
 fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
 
 fig.show()
-
-"""### Se tiene como resultado que que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""
+# Se tiene como resultado que que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""
 
 # 1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?
-"""
 
 import pandas as pd
 import numpy as np
@@ -221,11 +213,9 @@ costo_promedio_formateado = costo_promedio_ordenado.apply(lambda x: "${:,.0f}".f
 #tabla_costo_promedio = pd.DataFrame({'EVENT TYPE': costo_promedio_ordenado.index, 'Costo Promedio': costo_promedio_formateado}).reset_index()
 tabla_costo_promedio = pd.DataFrame({'Costo Promedio': costo_promedio_formateado}).reset_index()
 
-"""### Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
+### Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
 
 #2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?
-
-"""
 
 import plotly.express as px
 import pandas as pd
@@ -244,10 +234,9 @@ data = pd.DataFrame({'Tipo de Desastre': ['Incendios', 'Otros Desastres'], 'Porc
 fig = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
 fig.show()
 
-"""### Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
+### Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
 
 # 3.  ¿Cuál es la cantidad de incendios por año?
-"""
 
 #Filtramos los registros que corresponden a incendios
 incendios = DESA[DESA['EVENT TYPE'] == 'fire']
@@ -257,13 +246,11 @@ cantidad_incendios_por_año = incendios['YEAR'].value_counts().sort_index()
 
 data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Incendios': cantidad_incendios_por_año.values})
 data.plot( 'Año' , 'Cantidad de Incendios' )
-
-"""### Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.
+### Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.
 
 # 4.  ¿Cuál es la tasa de mortalidad de los incendios por año?
 
 ###            Total de incendios con muertos/ Total de incendios. Se presenta en gráfico de barras.
-"""
 
 # Convertimos las columnas a tipo numerico
 DESA['FATALITIES'] = pd.to_numeric(DESA['FATALITIES'], errors='coerce')
@@ -280,13 +267,9 @@ tasa_mortalidad_df = pd.DataFrame({'YEAR': tasa_mortalidad.index, 'tasa de Morta
 figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'})
 
 figm.show()
-
-"""### Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
+### Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
 
 # 5. ¿Cómo es la distribución de ocurrencia de incendios por día de la semana?  
-
-"""
-
 
 import plotly.express as px
 
@@ -310,7 +293,6 @@ fig.show()
 ##Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles.
 
 # 6. ¿Cuál es el número de incendios por localidad?
-"""
 
 incendios_por_localidad = CONS['GEO'].value_counts()
 df_incendios = pd.DataFrame({'Localidad': incendios_por_localidad.index, 'Número de Incendios': incendios_por_localidad.values})
@@ -321,12 +303,10 @@ fig = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Núme
 
 # Mostrar el gráfico
 fig.show()
-
-"""Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número similar de eventos correspondiente a 4440.
+# Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número simila3r de eventos correspondiente a 4440.#
 
 # 7. ¿Cuál es la distribución de los incendios (residenciales/no residenciales)?
 Se muestra en gráfico de torta para apreciar el comparativo.
-"""
 
 event_types = DESA['EVENT SUBGROUP'].unique()
 
@@ -343,11 +323,9 @@ cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
 fig = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
 fig.show()
-
-"""Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.
+# Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.
 
 # 8. ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente los rociadores?  tasa de efectividad= Total de incendios apagados por rociadoress/total de incendios
-"""
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
 
@@ -367,11 +345,7 @@ fig = px.pie(df, values='Cantidad', names='Resultado', title='Porcentaje de Efec
 fig.show()
 
 print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
-
-"""# 9.  ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo?
- tasa de efectividad: Total de incendios donde la alrma funcionó/total de incendios
-"""
-
+# 9.  ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo?
 
 conteo_eventos = AH['performance_of_system'].value_counts()
 
@@ -385,5 +359,4 @@ df = pd.DataFrame(data)
 fig = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectividad de Alarmas de Humo')
 
 fig.show()
-
-"""#El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""
+#El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""

@@ -75,65 +75,18 @@ DESA = DES.loc[:, ['EVENT GROUP', 'EVENT SUBGROUP', 'EVENT TYPE', 'EVENT START D
 
 """## Homologación de categorías"""
 
-# ver categorías de GEO con la frecuencia, en la base compilada CONS:
-CONS['GEO'].value_counts()
-
 """Encontramos que está Canadá y Fuerza armada Canadiense, por lo que se unen estas dos como Canadá."""
 
 # remplazar las categorías en GEO
 CONS['GEO'] = CONS['GEO'].replace(['canadian armed forces'], 'canada')
 
-# verificamos las categorías de GEO con la frecuencia:
-CONS['GEO'].value_counts()
-
-#ver categorías de performance_of_system con la frecuencia, en la base compilada CONS::
-CONS['performance_of_system'].value_counts()
-
-"""No hay categorías que se repitan"""
-
-# ver categorías de type of structure con la frecuencia, en la base compilada CONS:
-CONS['Type of structure'].value_counts()
-
-"""No hay categorías que se repitan"""
-
-# Revisamos ahora las categorías en la base general de desastres DESA, iniciamos con EVENT GROUP
-DESA['EVENT GROUP'].value_counts()
-
-"""Se tienen algunos datos sin sentido como las categorías 0, 1, 2, 47 y 93, por lo tanto se procede a cambiarlas y ponerlas como SIN que significa sin información."""
-
 # reemplazar las categorías en EVENT GROUP
 DESA['EVENT GROUP'] = DESA['EVENT GROUP'].replace(['0', '1', '2', '47', '93'], 'SIN')
-
-#Verificamos
-DESA['EVENT GROUP'].value_counts()
-
-# Revisamos ahora la categoría EVENT SUBGROUP
-DESA['EVENT SUBGROUP'].value_counts()
-
-"""Se tienen algunos datos sin sentido como las categorías 0, 25, 45, 6, por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información. Y se tiene la categoría fire y arson que se refieren a fuego, por lo cual se reunen en una como fire.  Se tiene también civil incident y hijacking que traduce secuestro, por lo que puede estar dentro de la categoría de incidente civil."""
 
 # remplazar las categorías en EVENT SUBGROUP
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['0', '25', '45', '6'], 'SIN')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['arson'], 'fire')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['hijacking'], 'civil incident')
-
-#Verificamos
-DESA['EVENT SUBGROUP'].value_counts()
-
-# Revisamos ahora la categoría EVENT TYPE
-DESA['EVENT TYPE'].value_counts()
-
-"""Se tienen algunos datos sin sentido como las categorías 3000, 10000, 1400, 4900, 3200, 65000, 500, 560, 0 Y 2000 por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información.
-
-Se tienen las categorías storms and severe thunderstorms, winter storm, hurricane / typhoon / tropical storm, storm - unspecified / other, geomagnetic storm que se refieren a tormentas, por lo cual se reunen en una como storm.
-
-Se tienen las categorías air, tornado, que se reunen en una como air.
-Se tienen las categorías wildfire, fire, que se reunen en una como fire.
-Se tienen las categorías vehicle, vehicle release, transportation que se reunen en una como vehicle.
-Se tienen las categorías rioting, disturbance / demonstrations que se reunen en una como disturbance / demonstrations.
-Se tienen las categorías pandemic, infestation, epidemic que se reunen en una como infestation/epidemic/pandemic.
-
-"""
 
 # remplazar las categorías en EVENT TYPE
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['3000', '10000', '1400', '4900', '3200', '65000', '500', '560', '0', '2000'], 'SIN')
@@ -145,27 +98,12 @@ DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['vehicle','vehicle release', 't
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['rioting'], 'disturbance / demonstrations')
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['pandemic', 'infestation', 'epidemic'], 'infestation/epidemic/pandemic')
 
-#Verificamos
-DESA['EVENT TYPE'].value_counts()
-
-"""# **Tratamiento de datos nulos**"""
-
-# validar cuales columnas tienen nulos en la base concatenada
-CONS.isnull().sum()
 
 #Para performance_of_system, value, status of casualty y type of structure agruparemos los nulos en "n.i." que significa que no hay información para que queden allá todos los no identificados
 CONS['performance_of_system'] = CONS['performance_of_system'].fillna('SIN')
 CONS['VALUE'] = CONS['VALUE'].fillna('SIN')
 CONS['Status of casualty'] = CONS['Status of casualty'].fillna('SIN')
 CONS['Type of structure'] = CONS['Type of structure'].fillna('SIN')
-
-# REVISAMOS LA BASE CONCATENADA
-CONS.isnull().sum()
-
-# validar cuales columnas tienen nulos en la base general de desastres
-DESA.isnull().sum()
-
-"""Se encuentran datos nulos en todas las columnas, los cuales se reemplazarán por n.i. que significa que no hay información."""
 
 DESA['EVENT GROUP'] = DESA['EVENT GROUP'].fillna('SIN')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].fillna('SIN')
@@ -175,16 +113,6 @@ DESA['FATALITIES'] = DESA['FATALITIES'].fillna('SIN')
 DESA['INJURED / INFECTED'] = DESA['INJURED / INFECTED'].fillna('SIN')
 DESA['MAGNITUDE'] = DESA['MAGNITUDE'].fillna('SIN')
 
-# Revisamos esta base
-DESA.isnull().sum()
-
-"""Ahora las bases está sin datos nulos.
-
-# **Generación de bodegas de datos**
-
-
-Una vez depuradas las bases tenemos las siguientes dos bodegas de datos
-"""
 
 DESA.head()
 

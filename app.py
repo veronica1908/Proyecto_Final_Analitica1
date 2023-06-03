@@ -138,7 +138,7 @@ DESA.head()
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
-"""# **Análisis descriptivo sobre las bases individuales y su relación: Plantearse 9 preguntas que le ayuden a tener un entendimiento de la información recolectada y le permitan estar más cerca de concluir sobre el tema analizado. Dar  respuesta a estas preguntas a través de tablas y gráficos.**
+"""# **Desastres en Canadá: influencia sobre la población y un enfoque sobre los incendios**
 
 # 1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?
 """

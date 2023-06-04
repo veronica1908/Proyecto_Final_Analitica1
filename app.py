@@ -49,7 +49,7 @@ DES.count()
 
 #Se identifican columnas con nombres similares y otras relacionadas en las bases de mortalidad, rociadores y alarma de humo, por ejemplo **casualties** con **incidents** y **casualties**. Así como *Performance of sprinkler system*, *structural fires* y *Performance of smoke alarm device*, *residential fires*  que se refieren al funcionamiento del sistema como tal, por lo tanto se procede a unificar estas variables en las bases.
 
-Como la tabla general de desastres tiene unas variables totalmente diferentes, se procede a concatenar las otras tres tablas.
+##Como la tabla general de desastres tiene unas variables totalmente diferentes, se procede a concatenar las otras tres tablas.
 
 ## Renombrar algunas columnas
 

@@ -233,8 +233,7 @@ DESA = DESA.drop('EVENT START DATE', axis=1)
 
 """ # Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
 
-#Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.**
-"""
+#Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
 
 desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})

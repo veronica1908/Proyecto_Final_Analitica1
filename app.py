@@ -226,7 +226,6 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
-st.markdown("<h1 style='text-align: center; color: #951F0F;'>Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios </h1>", unsafe_allow_html=True)
 
 """ # Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
 
@@ -237,7 +236,9 @@ desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
 figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'})
 
-figd.show()
+c1.plotly_chart(figd)
+
+
 
 """### Dentro de la base general de desastres, se encuentra que el desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
 

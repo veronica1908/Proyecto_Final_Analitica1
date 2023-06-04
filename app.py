@@ -257,10 +257,10 @@ st.markdown("<h6 style='text-align: center; color: #50668a;'>Semestre: 2023-2</h
 
 st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canadá: Énfasis en los incendios, ¿Podemos hacer algo para controlarlos?</h1>", unsafe_allow_html=True)
 
-# Ruta de la imagen
+# AGREGAMOS UINA IMAGEN
 image= "incendiosCanada.jpg"
 
-st.image(image, caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+st.image(image, caption=None, width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 
 #INICIAMOS EL DESARROLLO DE LAS PREGUNTAS, PRESENTÁNDOLO COMO RESPUESTAS INFORMATIVAS EN STREAMLIT

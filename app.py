@@ -53,7 +53,7 @@ DES.count()
 
 ## Renombrar algunas columnas
 
-Antes de concatenar las bases, se renombran algunas columnas para que al concatenar, queden en la misma, dado que se refieren a una misma variable, pero en cada base tienen un nombre diferente.
+#Antes de concatenar las bases, se renombran algunas columnas para que al concatenar, queden en la misma, dado que se refieren a una misma variable, pero en cada base tienen un nombre diferente.
 
 
 MOR.rename(columns={'GEO':'GEO','Casualties':'Incidents&Casualties', 'REF_DATE':'YEAR'}, inplace=True)

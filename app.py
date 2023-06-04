@@ -226,6 +226,7 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
+st.markdown("<h1 style='text-align: center; color: #951F0F;'>Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios </h1>", unsafe_allow_html=True)
 
 """ # Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
 
@@ -491,63 +492,3 @@ fig = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectivida
 fig.show()
 
 """### El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""
-
-"""**Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.**
-"""
-
-desastre=DESA['EVENT TYPE'].value_counts()
-desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
-figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'})
-
-figd.show()
-
-"""### Dentro de la base general de desastres, se encuentra que el desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
-
-# **Se realiza el ejercicio de ocurrencia de desastres por inundaciones por año**
-"""
-
-#Filtramos los registros que corresponden a inundaciones
-inundaciones = DESA[DESA['EVENT TYPE'] == 'flood']
-
-#calculamos la cantidad de inundaciones por año
-cantidad_Inundaciones_por_año = inundaciones['YEAR'].value_counts().sort_index()
-
-dataI = pd.DataFrame({'Año': cantidad_Inundaciones_por_año.index, 'Cantidad de Inundaciones': cantidad_Inundaciones_por_año.values})
-
-dataI.plot( 'Año' , 'Cantidad de Inundaciones' )
-
-"""### En comparación con la ocurrencia de incendios, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
-
-# **Se realiza también el ejercicio de ocurrencia de desastres por tormentas por año para ver su comportamiento en el tiempo**
-"""
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-#Filtramos los registros que corresponden a tormentas
-tormentas = DESA[DESA['EVENT TYPE'] == 'storm']
-
-#calculamos la cantidad de tormentas por año
-cantidad_tormentas_por_año = tormentas['YEAR'].value_counts().sort_index()
-
-dataT = pd.DataFrame({'Año': cantidad_tormentas_por_año.index, 'Cantidad de tormentas': cantidad_tormentas_por_año.values})
-
-dataT.plot( 'Año' , 'Cantidad de tormentas' )
-
-"""## En comparación con la ocurrencia de incendios y la ocurrencia de inundaciones, se tiene una misma tendencia, ya que la mayor cantidad de ocurrencia de este tipo desastres ha sido durante los últimos años; de 1970 y 1980 en adelante.
-
-## A nivel general, puede decirse que el top 3 de desastres, conformado por inundaciones, tormentas e incendios, tienen una misma tendencia de comportamiento en el tiempo en cuanto a la cantidad de eventos ocurridos. Podría especularse, que a principios de siglo, quizá la ocurrencia haya sido similar, pero los datos no hayan quedado registrados, ya que la diferencia de la variación entre la frecuencia y cantidad de eventos a principio de siglo y a final de siglo, es bastante notoria.
-
-# **Finalmente, se revisa la cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
-"""
-
-eventos = ['fire', 'storm', 'flood']
-filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
-datos_filtrados = DESA[filtro_eventos]
-muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
-df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
-fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
-
-fig.show()
-
-"""### Se tiene como resultado que que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""

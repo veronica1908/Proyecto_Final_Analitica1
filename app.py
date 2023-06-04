@@ -231,10 +231,25 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
 
-""" UNIVERSIDAD DE ANTIOQUIA / FACULTAD DE INGENIERÍA / DEPARTAMENTO DE INGENIERÍA INDUSTRIAL / INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS"""
-"""
-Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González"""
-"""Semestre: 2023-2"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+st.markdown("<h5 style='text-align: center; color: #50668a;'>UNIVERSIDAD DE ANTIOQUIA / FACULTAD DE INGENIERÍA / DEPARTAMENTO DE INGENIERÍA INDUSTRIAL / INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS</h5>", unsafe_allow_html=True)
+
+st.markdown("<h5 style='text-align: center; color: #50668a;'>Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González</h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center; color: #50668a;'>Semestre: 2023-2</h5>", unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios</h1>", unsafe_allow_html=True)
 

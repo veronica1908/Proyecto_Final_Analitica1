@@ -257,7 +257,7 @@ imageB= "Bandera.jpg"
 imageI= "incendiosCanada.jpj"
 
 st.image(imageB, caption=None, width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-st.image(imageI, caption=None, width=100, use_column_width=200, clamp=False, channels="RGB", output_format="auto")
+st.image(imageI, caption=None, width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 #AGREGAMOS EL TÍTULO DEL TRABAJO
 

@@ -344,7 +344,7 @@ figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={
 
 st.plotly_chart(figm)
 
-"""### Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
+"""Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
 
 ## Distribución de ocurrencia de incendios por día de la semana
 Gráfico de barras
@@ -392,13 +392,10 @@ st.plotly_chart(figL)
 #count_fire
 
 event_types = DESA['EVENT SUBGROUP'].unique()
-event_types
 
 event_types = DESA['EVENT TYPE'].unique()
-event_types
 
 fire_rows = DESA[(DESA['EVENT TYPE'] == 'residential') & (DESA['EVENT SUBGROUP'] == 'fire')]
-fire_rows
 
 residenciales = DESA[DESA['EVENT TYPE'] == 'residential'][DESA['EVENT SUBGROUP'] == 'fire']
 cantidad_residenciales = len(residenciales)
@@ -433,7 +430,7 @@ st.plotly_chart(figrr)
 
 print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
 
-"""## Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo?
+"""## Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo
  tasa de efectividad: Total de incendios donde la alrma funcionó/total de incendios
 """
 
@@ -449,4 +446,4 @@ figah = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectivi
 
 st.plotly_chart(figah)
 
-"""### El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""
+""" El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""

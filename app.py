@@ -478,7 +478,7 @@ figR.update_layout(template = 'simple_white',
 c4.plotly_chart(figR)
 
 ###
-c4.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h6>", unsafe_allow_html=True)
+c4.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incendios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h6>", unsafe_allow_html=True)
 
 #10
 c5.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)

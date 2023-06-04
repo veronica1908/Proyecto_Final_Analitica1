@@ -462,7 +462,7 @@ cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
 
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio',
-               width=370, height=370)
+               width=300, height=300)
 
 figR.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',
@@ -498,7 +498,7 @@ data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios
 df = pd.DataFrame(data)
 
 figrr = px.pie(df, values='Cantidad', names='Resultado',
-               width=370, height=370)
+               width=300, height=300)
 
 figrr.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',
@@ -515,7 +515,9 @@ figrr.update_layout(template = 'simple_white',
 c5.plotly_chart(figrr)
 
 
-print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
+###
+c5.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
+
 
 
 #11
@@ -531,7 +533,7 @@ data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [
 df = pd.DataFrame(data)
 
 figah = px.pie(df, values='Cantidad', names='Resultado',
-               width=370, height=370)
+               width=300, height=300)
 
 figah.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',

@@ -27,7 +27,7 @@ import numpy as np
 import plotly.express as px
 from plotly.subplots import make_subplots
 
-"""Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
+###Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 
 #Realizamos pruebas para verificar que haya conexión a la base de datos
 AH  = pd.read_csv('https://www.4minds.solutions/tarea/final/BDALARMAHUMO.csv', sep=';',  low_memory=False) #Base de datos de Alarmas de Humo
@@ -47,49 +47,49 @@ MOR.count()
 #Vemos los nombres de las columnas-variables de la base general de desastres.
 DES.count()
 
-"""Se identifican columnas con nombres similares y otras relacionadas en las bases de mortalidad, rociadores y alarma de humo, por ejemplo **casualties** con **incidents** y **casualties**. Así como *Performance of sprinkler system*, *structural fires* y *Performance of smoke alarm device*, *residential fires*  que se refieren al funcionamiento del sistema como tal, por lo tanto se procede a unificar estas variables en las bases.
+#Se identifican columnas con nombres similares y otras relacionadas en las bases de mortalidad, rociadores y alarma de humo, por ejemplo **casualties** con **incidents** y **casualties**. Así como *Performance of sprinkler system*, *structural fires* y *Performance of smoke alarm device*, *residential fires*  que se refieren al funcionamiento del sistema como tal, por lo tanto se procede a unificar estas variables en las bases.
 
 Como la tabla general de desastres tiene unas variables totalmente diferentes, se procede a concatenar las otras tres tablas.
 
 ## Renombrar algunas columnas
 
 Antes de concatenar las bases, se renombran algunas columnas para que al concatenar, queden en la misma, dado que se refieren a una misma variable, pero en cada base tienen un nombre diferente.
-"""
+
 
 MOR.rename(columns={'GEO':'GEO','Casualties':'Incidents&Casualties', 'REF_DATE':'YEAR'}, inplace=True)
-MOR.columns
+
 
 ROC.rename(columns={'GEO':'GEO','Incidents and casualties':'Incidents&Casualties','Performance of sprinkler system, structural fires':'performance_of_system','REF_DATE':'YEAR'}, inplace=True)
-ROC.columns
+
 
 AH.rename(columns={'GEO':'GEO','Incidents and casualties':'Incidents&Casualties','Performance of smoke alarm device, residential fires':'performance_of_system','REF_DATE':'YEAR'},inplace=True)
-AH.columns
+
 
 #DE la base de datos de desastres quitaremos los puntos para poder hacer bien los cálculos numéricos
 DES['ESTIMATED TOTAL COST'] = DES['ESTIMATED TOTAL COST'].str.replace('.', '')
-print(DES['ESTIMATED TOTAL COST'].head(10))
+
 
 #DE la base de datos de desastres quitaremos los puntos para poder hacer bien los cálculos numéricos
 DES['NORMALIZED TOTAL COST'] = DES['NORMALIZED TOTAL COST'].astype(str)
 DES['NORMALIZED TOTAL COST'] = DES['NORMALIZED TOTAL COST'].str.replace('.', '')
-print(DES['NORMALIZED TOTAL COST'].head(10))
 
-"""## Concatenar bases
 
-Una vez renombradas, se procede a concatenar las tres bases con variables similares.
-"""
+## Concatenar bases
+
+#Una vez renombradas, se procede a concatenar las tres bases con variables similares.
+
 
 # concatenar las bases
 CON = pd.concat([AH, MOR, ROC])
-print('concat sin definir axis:' , CON.shape) # concatena por columnas
+
 
 #Revisamos las variables de la nueva base
-CON.count()
 
-"""# **Depuración: Homologación de categorías, tipos de datos**
+
+# **Depuración: Homologación de categorías, tipos de datos**
 ## A. Volver el nombre de las columnas a minúscula.
 ## usaremos la función lower para ponerlas todas en minúsculas
-"""
+
 
 #Quitamos los espacios en blanco y pasamos a minusculas de la nueva tabla
 CON['GEO'] = CON['GEO'].apply(lambda x: x.lower().strip() if pd.notnull(x) else x )
@@ -106,18 +106,18 @@ DES['PLACE'] = DES['PLACE'].apply(lambda x: x.lower().strip() if pd.notnull(x) e
 
 # guardamos el df con las columnas definidas para ser analizadas de acuerdo con el contenido de las tres bases concatenadas.
 CONS = CON.loc[:, ['YEAR', 'GEO', 'performance_of_system', 'Incidents&Casualties', 'VALUE', 'Status of casualty', 'Type of structure']]
-CONS
+
 
 # guardamos el df con las columnas definidas para ser analizadas de acuerdo con su contenido - para la base general de incendios
 DESA = DES.loc[:, ['EVENT GROUP', 'EVENT SUBGROUP', 'EVENT TYPE', 'EVENT START DATE', 'FATALITIES', 'INJURED / INFECTED', 'ESTIMATED TOTAL COST', 'NORMALIZED TOTAL COST', 'MAGNITUDE', 'PLACE']]
-DESA
 
-"""## Homologación de categorías"""
+
+## Homologación de categorías
 
 # ver categorías de GEO con la frecuencia, en la base compilada CONS:
 CONS['GEO'].value_counts()
 
-"""Encontramos que está Canadá y Fuerza armada Canadiense, por lo que se unen estas dos como Canadá."""
+#Encontramos que está Canadá y Fuerza armada Canadiense, por lo que se unen estas dos como Canadá.
 
 # remplazar las categorías en GEO
 CONS['GEO'] = CONS['GEO'].replace(['canadian armed forces'], 'canada')
@@ -128,51 +128,41 @@ CONS['GEO'].value_counts()
 #ver categorías de performance_of_system con la frecuencia, en la base compilada CONS::
 CONS['performance_of_system'].value_counts()
 
-"""No hay categorías que se repitan"""
+#No hay categorías que se repitan
 
 # ver categorías de type of structure con la frecuencia, en la base compilada CONS:
 CONS['Type of structure'].value_counts()
 
-"""No hay categorías que se repitan"""
+#No hay categorías que se repitan"""
 
 # Revisamos ahora las categorías en la base general de desastres DESA, iniciamos con EVENT GROUP
 DESA['EVENT GROUP'].value_counts()
 
-"""Se tienen algunos datos sin sentido como las categorías 0, 1, 2, 47 y 93, por lo tanto se procede a cambiarlas y ponerlas como SIN que significa sin información."""
+#Se tienen algunos datos sin sentido como las categorías 0, 1, 2, 47 y 93, por lo tanto se procede a cambiarlas y ponerlas como SIN que significa sin información."""
 
 # reemplazar las categorías en EVENT GROUP
 DESA['EVENT GROUP'] = DESA['EVENT GROUP'].replace(['0', '1', '2', '47', '93'], 'SIN')
 
-#Verificamos
-DESA['EVENT GROUP'].value_counts()
-
 # Revisamos ahora la categoría EVENT SUBGROUP
 DESA['EVENT SUBGROUP'].value_counts()
 
-"""Se tienen algunos datos sin sentido como las categorías 0, 25, 45, 6, por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información. Y se tiene la categoría fire y arson que se refieren a fuego, por lo cual se reunen en una como fire.  Se tiene también civil incident y hijacking que traduce secuestro, por lo que puede estar dentro de la categoría de incidente civil."""
+#Se tienen algunos datos sin sentido como las categorías 0, 25, 45, 6, por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información. Y se tiene la categoría fire y arson que se refieren a fuego, por lo cual se reunen en una como fire.  Se tiene también civil incident y hijacking que traduce secuestro, por lo que puede estar dentro de la categoría de incidente civil.
 
 # remplazar las categorías en EVENT SUBGROUP
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['0', '25', '45', '6'], 'SIN')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['arson'], 'fire')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].replace(['hijacking'], 'civil incident')
 
-#Verificamos
-DESA['EVENT SUBGROUP'].value_counts()
 
-# Revisamos ahora la categoría EVENT TYPE
-DESA['EVENT TYPE'].value_counts()
+#Se tienen algunos datos sin sentido como las categorías 3000, 10000, 1400, 4900, 3200, 65000, 500, 560, 0 Y 2000 por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información.
 
-"""Se tienen algunos datos sin sentido como las categorías 3000, 10000, 1400, 4900, 3200, 65000, 500, 560, 0 Y 2000 por lo tanto se procede a cambiarlas y ponerlas como s.i. que significa sin información.
+#Se tienen las categorías storms and severe thunderstorms, winter storm, hurricane / typhoon / tropical storm, storm - unspecified / other, geomagnetic storm que se refieren a tormentas, por lo cual se reunen en una como storm.
 
-Se tienen las categorías storms and severe thunderstorms, winter storm, hurricane / typhoon / tropical storm, storm - unspecified / other, geomagnetic storm que se refieren a tormentas, por lo cual se reunen en una como storm.
-
-Se tienen las categorías air, tornado, que se reunen en una como air.
-Se tienen las categorías wildfire, fire, que se reunen en una como fire.
-Se tienen las categorías vehicle, vehicle release, transportation que se reunen en una como vehicle.
-Se tienen las categorías rioting, disturbance / demonstrations que se reunen en una como disturbance / demonstrations.
-Se tienen las categorías pandemic, infestation, epidemic que se reunen en una como infestation/epidemic/pandemic.
-
-"""
+#Se tienen las categorías air, tornado, que se reunen en una como air.
+#Se tienen las categorías wildfire, fire, que se reunen en una como fire.
+#Se tienen las categorías vehicle, vehicle release, transportation que se reunen en una como vehicle.
+#Se tienen las categorías rioting, disturbance / demonstrations que se reunen en una como disturbance / demonstrations.
+#Se tienen las categorías pandemic, infestation, epidemic que se reunen en una como infestation/epidemic/pandemic.
 
 # remplazar las categorías en EVENT TYPE
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['3000', '10000', '1400', '4900', '3200', '65000', '500', '560', '0', '2000'], 'SIN')
@@ -184,13 +174,7 @@ DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['vehicle','vehicle release', 't
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['rioting'], 'disturbance / demonstrations')
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].replace(['pandemic', 'infestation', 'epidemic'], 'infestation/epidemic/pandemic')
 
-#Verificamos
-DESA['EVENT TYPE'].value_counts()
-
-"""# **Tratamiento de datos nulos**"""
-
-# validar cuales columnas tienen nulos en la base concatenada
-CONS.isnull().sum()
+#Tratamiento de datos nulos
 
 #Para performance_of_system, value, status of casualty y type of structure agruparemos los nulos en "n.i." que significa que no hay información para que queden allá todos los no identificados
 CONS['performance_of_system'] = CONS['performance_of_system'].fillna('SIN')
@@ -198,13 +182,7 @@ CONS['VALUE'] = CONS['VALUE'].fillna('SIN')
 CONS['Status of casualty'] = CONS['Status of casualty'].fillna('SIN')
 CONS['Type of structure'] = CONS['Type of structure'].fillna('SIN')
 
-# REVISAMOS LA BASE CONCATENADA
-CONS.isnull().sum()
-
-# validar cuales columnas tienen nulos en la base general de desastres
-DESA.isnull().sum()
-
-"""Se encuentran datos nulos en todas las columnas, los cuales se reemplazarán por n.i. que significa que no hay información."""
+#Se encuentran datos nulos en todas las columnas, los cuales se reemplazarán por n.i. que significa que no hay información."""
 
 DESA['EVENT GROUP'] = DESA['EVENT GROUP'].fillna('SIN')
 DESA['EVENT SUBGROUP'] = DESA['EVENT SUBGROUP'].fillna('SIN')
@@ -214,27 +192,14 @@ DESA['FATALITIES'] = DESA['FATALITIES'].fillna('SIN')
 DESA['INJURED / INFECTED'] = DESA['INJURED / INFECTED'].fillna('SIN')
 DESA['MAGNITUDE'] = DESA['MAGNITUDE'].fillna('SIN')
 
-# Revisamos esta base
-DESA.isnull().sum()
-
-"""Ahora las bases está sin datos nulos.
-
 # **Generación de bodegas de datos**
 
 
-Una vez depuradas las bases tenemos las siguientes dos bodegas de datos
-"""
+#Una vez depuradas las bases tenemos las siguientes dos bodegas de datos
 
-DESA.head()
+# **Transformaciones: Aplicación de funciones para la creación de nuevas variables**
 
-CONS.head()
-
-"""# **Transformaciones: Aplicación de funciones para la creación de nuevas variables**
-
-Aquí ponemos extraer el año, creando una nueva variable en la base "DESA" con la variable EVENT START DATE
-"""
-
-DESA.columns
+#Aquí ponemos extraer el año, creando una nueva variable en la base "DESA" con la variable EVENT START DATE
 
 #Convertimos la columna "EVENT START DATE" a formato de datetime
 DESA['EVENT START DATE']=pd.to_datetime(DESA['EVENT START DATE'],errors='coerce')
@@ -258,16 +223,13 @@ DESA['DAY']=DESA['DAY'].astype(int)
 import calendar
 DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 else '')
 
-DESA.head()
-
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 DESA.columns
 
-"""# **Análisis descriptivo sobre las bases individuales y su relación: Plantearse 9 preguntas que le ayuden a tener un entendimiento de la información recolectada y le permitan estar más cerca de concluir sobre el tema analizado. Dar  respuesta a estas preguntas a través de tablas y gráficos.**
+# **Análisis descriptivo sobre las bases individuales y su relación: Plantearse 9 preguntas que le ayuden a tener un entendimiento de la información recolectada y le permitan estar más cerca de concluir sobre el tema analizado. Dar  respuesta a estas preguntas a través de tablas y gráficos.**
 
-# 1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?
-"""
+"""1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?"""
 
 import pandas as pd
 import numpy as np
@@ -289,12 +251,10 @@ costo_promedio_formateado = costo_promedio_ordenado.apply(lambda x: "${:,.0f}".f
 tabla_costo_promedio = pd.DataFrame({'Costo Promedio': costo_promedio_formateado}).reset_index()
 tabla_costo_promedio
 
-"""### Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
+"""Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
 
-#2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?
+2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?"""
 
-Representado en gráfico de torta.
-"""
 
 import plotly.express as px
 import pandas as pd
@@ -313,7 +273,7 @@ data = pd.DataFrame({'Tipo de Desastre': ['Incendios', 'Otros Desastres'], 'Porc
 fig = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
 fig.show()
 
-"""### Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
+"""Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
 
 # 3.  ¿Cuál es la cantidad de incendios por año?
 Se muestra un gráfico de lineas
@@ -329,7 +289,7 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 data.plot( 'Año' , 'Cantidad de Incendios' )
 
-"""### Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
+"""Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
 Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.
 
 # 4.  ¿Cuál es la tasa de mortalidad de los incendios por año?

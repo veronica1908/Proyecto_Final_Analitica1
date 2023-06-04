@@ -240,6 +240,7 @@ st.title("Desastres en Canadá: Incidencia de los desastres en la cotidianidad, 
 st.markdown("<h1 style='text-align: center; color: #951F0F;'>Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios</h1>", unsafe_allow_html=True)
 
 
+
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
 
 desastre=DESA['EVENT TYPE'].value_counts()

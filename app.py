@@ -501,8 +501,19 @@ data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [
 
 df = pd.DataFrame(data)
 
-figah = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectividad de Alarmas de Humo')
+figah = px.pie(df, values='Cantidad', names='Resultado',
+               width=370, height=370)
 
+figah.update_layout(template = 'simple_white',
+                  paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  legend=dict(orientation="h",
+                              yanchor="bottom",
+                              y=-0.4,
+                              xanchor="center",
+                              x=0.5))
+
+#enviar a streamlit
 c6.plotly_chart(figah)
 
 ###

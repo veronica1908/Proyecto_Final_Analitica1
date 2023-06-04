@@ -255,7 +255,7 @@ st.markdown("<h6 style='text-align: center; color: #50668a;'>Semestre: 2023-2</h
 #AGREGAMOS IMAGEN BANDERA DE CANADÁ PREVIO AL TITULO
 imageB= "Bandera.jpg"
 
-st.image(imageB, caption="Tomado de: https://www.istockphoto.com/es/foto/bandera-de-canad%C3%A1-gm470914892-62462954", width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+    st.image(imageB, caption=None, width=150, use_column_width=300, clamp=False, channels="RGB", output_format="auto")
 
 #AGREGAMOS EL TÍTULO DEL TRABAJO
 

@@ -241,10 +241,10 @@ figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVEN
 
 st.plotly_chart(figd)
 
-""" ### El desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
+"""El desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
 
 """
-# **La cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
+"""###Cantidad de muertes generadas por estos tres principales tipos de desastre"""
 
 import pandas as pd
 import numpy as np
@@ -253,8 +253,6 @@ import numpy as np
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace('.', '')
 DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
-
-
 eventos = ['fire', 'storm', 'flood']
 filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
 datos_filtrados = DESA[filtro_eventos]
@@ -264,7 +262,7 @@ fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Ti
 st.plotly_chart(fig)
 
 
-"""### Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente
+"""Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente
 las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""
 
 

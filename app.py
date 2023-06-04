@@ -252,12 +252,16 @@ st.markdown("<h5 style='text-align: center; color: #50668a;'>UNIVERSIDAD DE ANTI
 st.markdown("<h6 style='text-align: center; color: #50668a;'>Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González</h6>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: #50668a;'>Semestre: 2023-2</h6>", unsafe_allow_html=True)
 
+#AGREGAMOS IMAGEN BANDERA DE CANADÁ PREVIO AL TITULO
+imageB= "Bandera.jpg"
+
+st.image(imageB, caption="Tomado de: https://www.istockphoto.com/es/foto/bandera-de-canad%C3%A1-gm470914892-62462954", width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 #AGREGAMOS EL TÍTULO DEL TRABAJO
 
 st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canadá: Énfasis en los incendios, ¿Podemos hacer algo para controlarlos?</h1>", unsafe_allow_html=True)
 
-# AGREGAMOS UINA IMAGEN
+# AGREGAMOS UNA IMAGEN
 image= "incendiosCanada.jpg"
 
 st.image(image, caption="Tomado de: https://www.istockphoto.com/es/foto/incendios-de-lytton-bc-gm1326687341-411303646", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")

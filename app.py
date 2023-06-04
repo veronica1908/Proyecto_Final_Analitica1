@@ -138,7 +138,7 @@ DESA.head()
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
-st.markdown("<h1 style='text-align: center; color: #951F0F;'>Desastres en Canadá: influencia sobre la población y un enfoque sobre los incendios </h1>", unsafe_allow_html=True)
+###Desastres en Canadá: influencia sobre la población y un enfoque sobre los incendios
 
 # **Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.**
 

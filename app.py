@@ -411,7 +411,6 @@ st.plotly_chart(figR)
 """
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
-conteo_eventos
 
 conteo_performance = ROC['performance_of_system'].value_counts()
 incendios_con_rociadores = conteo_performance['Sprinkler operated']

@@ -339,7 +339,7 @@ figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento':
 st.plotly_chart(figC)
 
 ###
-st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.</h2>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que el tipo de desastre que implica mayores costos para la normalización entre los tres definidos, es el desastre por incendio, ocupando a nivel general, el segundo lugar entre todos los tipos de desastres. Los incendios pueden acabar con todo a su paso si no son controlados y su costo promedio de normalización está en $39,595,179,216,216, luego están las tormentas que son incontrolables y las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente.</h2>", unsafe_allow_html=True)
 # AGREGAMOS UNA IMAGEN
 imagein= "incendio.jpg"
 

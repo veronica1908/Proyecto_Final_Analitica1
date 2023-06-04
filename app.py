@@ -276,7 +276,7 @@ st.plotly_chart(figd)
 # AGREGAMOS UNA IMAGEN
 imageI= "inundaciones.jpg"
 
-st.image(imageI, caption="Tomado de: https://media.istockphoto.com/id/1356603199/es/foto/inundaci%C3%B3n-y-humo-negro-del-fuego-en-la-ciudad-y-las-tierras-de-cultivo-despu%C3%A9s-de-la-tormenta.jpg?s=612x612&w=0&k=20&c=Ep9sSC__XJVVePWa1eXCU7fyVLGjb8qBZVO2nuZ1mGc=", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
+st.image(imageI, caption="Inundaciones. Tomado de: https://media.istockphoto.com/id/1356603199/es/foto/inundaci%C3%B3n-y-humo-negro-del-fuego-en-la-ciudad-y-las-tierras-de-cultivo-despu%C3%A9s-de-la-tormenta.jpg?s=612x612&w=0&k=20&c=Ep9sSC__XJVVePWa1eXCU7fyVLGjb8qBZVO2nuZ1mGc=", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
 
 
@@ -306,7 +306,7 @@ st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene como resul
 # AGREGAMOS UNA IMAGEN
 imageT= "tormentas.jpg"
 
-st.image(imageT, caption="Tomado de: https://www.istockphoto.com/es/foto/tormenta-entrante-sobre-el-r%C3%ADo-bow-en-calgary-gm1327119477-411576407?phrase=tormentas%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
+st.image(imageT, caption="Tormentas. Tomado de: https://www.istockphoto.com/es/foto/tormenta-entrante-sobre-el-r%C3%ADo-bow-en-calgary-gm1327119477-411576407?phrase=tormentas%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
 #3
 st.markdown("<h2 style='text-align: center; color: #930000;'>Costo promedio de la normalización por tipo de desastre</h2>", unsafe_allow_html=True)
@@ -334,7 +334,7 @@ st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que el tip
 # AGREGAMOS UNA IMAGEN
 imagein= "incendio.jpg"
 
-st.image(imagein, caption="Tomado de: https://www.istockphoto.com/es/foto/bombero-de-retenci%C3%B3n-de-la-manguera-se%C3%B1alando-corriente-de-agua-en-fuego-gm157442677-9126810?phrase=incendio%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
+st.image(imagein, caption="Incendios. Tomado de: https://www.istockphoto.com/es/foto/bombero-de-retenci%C3%B3n-de-la-manguera-se%C3%B1alando-corriente-de-agua-en-fuego-gm157442677-9126810?phrase=incendio%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
             
 #4
 st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios con respecto al resto de desastres</h2>", unsafe_allow_html=True)

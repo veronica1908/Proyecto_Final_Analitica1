@@ -441,9 +441,10 @@ st.plotly_chart(figL)
 ###
 st.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número similar de eventos correspondiente a 4440.</h2>", unsafe_allow_html=True)
 
-
+#----------------------------------------
 #9
-st.markdown("<h2 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h2>", unsafe_allow_html=True)
+c4, c5, c6= st.columns((1,1,1))
+c4.markdown("<h2 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h2>", unsafe_allow_html=True)
 
 #count_fire = DESA[DESA['EVENT SUBGROUP'] == 'fire']['EVENT SUBGROUP'].value_counts()
 #count_fire
@@ -460,13 +461,13 @@ no_residenciales = DESA[DESA['EVENT TYPE'] == 'non-residential'][DESA['EVENT SUB
 cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
-st.plotly_chart(figR)
+c4.plotly_chart(figR)
 
 ###
-st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h2>", unsafe_allow_html=True)
+c4.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h2>", unsafe_allow_html=True)
 
 #10
-st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h2>", unsafe_allow_html=True)
+c5.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h2>", unsafe_allow_html=True)
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
 
@@ -483,14 +484,14 @@ data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios
 df = pd.DataFrame(data)
 
 figrr = px.pie(df, values='Cantidad', names='Resultado', title='Porcentaje de Efectividad de Rociadores')
-st.plotly_chart(figrr)
+c5.plotly_chart(figrr)
 
 print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
 
 
 #11
 
-st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h2>", unsafe_allow_html=True)
+c6.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h2>", unsafe_allow_html=True)
 
 conteo_eventos = AH['performance_of_system'].value_counts()
 conteo_performance = AH['performance_of_system'].value_counts()
@@ -502,7 +503,7 @@ df = pd.DataFrame(data)
 
 figah = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectividad de Alarmas de Humo')
 
-st.plotly_chart(figah)
+c6.plotly_chart(figah)
 
 ###
-st.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h2>", unsafe_allow_html=True)
+c6.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h2>", unsafe_allow_html=True)

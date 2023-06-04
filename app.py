@@ -227,7 +227,7 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
 
-""" Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
+"""##Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
 
 """1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?"""
 

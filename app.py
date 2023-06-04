@@ -231,8 +231,8 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
 
-""" ###FACULTAD DE INGENIERÍA / DEPARTAMENTO DE INGENIERÍA INDUSTRIAL / INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS
-Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González
+""" ### FACULTAD DE INGENIERÍA / DEPARTAMENTO DE INGENIERÍA INDUSTRIAL / INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS*
+Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González*
 Semestre: 2023-2
 
 

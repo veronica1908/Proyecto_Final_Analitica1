@@ -274,6 +274,14 @@ st.image(image, caption="Tomado de: https://www.istockphoto.com/es/foto/incendio
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
 st.markdown("<h6 style='text-align: center; color: #525252;'>El desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las tormentas y en tercer lugar los incendios, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.</h6>", unsafe_allow_html=True)
 
+# AGREGAMOS UNA IMAGEN
+imageI= "inundaciones.jpg"
+
+st.image(imageI, caption="Tomado de: https://media.istockphoto.com/id/1356603199/es/foto/inundaci%C3%B3n-y-humo-negro-del-fuego-en-la-ciudad-y-las-tierras-de-cultivo-despu%C3%A9s-de-la-tormenta.jpg?s=612x612&w=0&k=20&c=Ep9sSC__XJVVePWa1eXCU7fyVLGjb8qBZVO2nuZ1mGc=", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
+
+
+
+
 desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
 figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'})
@@ -298,6 +306,13 @@ muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index(
 df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
 fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
 st.plotly_chart(fig)
+
+
+# AGREGAMOS UNA IMAGEN
+imageT= "tormentas.jpg"
+
+st.image(imageT, caption="Tomado de: https://www.istockphoto.com/es/foto/tormenta-entrante-sobre-el-r%C3%ADo-bow-en-calgary-gm1327119477-411576407?phrase=tormentas%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
+
 
 ###
 st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos.</h2>", unsafe_allow_html=True)

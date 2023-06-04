@@ -225,9 +225,9 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 
 #EVENT START DATE contiene valores nulos, ya que fue una columna que fue desglosada, procedemos a eliminarla.
 DESA = DESA.drop('EVENT START DATE', axis=1)
-DESA.columns
 
-# **Análisis descriptivo sobre las bases individuales y su relación: Plantearse 9 preguntas que le ayuden a tener un entendimiento de la información recolectada y le permitan estar más cerca de concluir sobre el tema analizado. Dar  respuesta a estas preguntas a través de tablas y gráficos.**
+
+""" Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
 
 """1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?"""
 
@@ -253,7 +253,7 @@ tabla_costo_promedio
 
 """Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
 
-2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?"""
+#2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?"""
 
 
 import plotly.express as px

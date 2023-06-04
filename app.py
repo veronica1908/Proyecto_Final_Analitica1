@@ -244,7 +244,7 @@ st.plotly_chart(figd)
 """El desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
 
 """
-"""###Cantidad de muertes generadas por estos tres principales tipos de desastre"""
+"""## Cantidad de muertes generadas por estos tres principales tipos de desastre"""
 
 import pandas as pd
 import numpy as np
@@ -287,7 +287,7 @@ st.plotly_chart(figC)
 
 """Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
 
-# 2. ¿Cual es el porcentaje de incendios con respecto al resto de desastres?"""
+## Porcentaje de incendios con respecto al resto de desastres"""
 
 
 import plotly.express as px
@@ -304,13 +304,12 @@ porcentaje_no_incendios = 100 - porcentaje_incendios
 
 data = pd.DataFrame({'Tipo de Desastre': ['Incendios', 'Otros Desastres'], 'Porcentaje': [porcentaje_incendios, porcentaje_no_incendios]})
 
-fig = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
-fig.show()
+figPP = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
+st.plotly_chart(figPP)
 
 """Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
 
-# 3.  ¿Cuál es la cantidad de incendios por año?
-Se muestra un gráfico de lineas
+## Cantidad de incendios por año
 """
 
 #Filtramos los registros que corresponden a incendios
@@ -326,9 +325,7 @@ data.plot( 'Año' , 'Cantidad de Incendios' )
 """Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
 Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.
 
-# 4.  ¿Cuál es la tasa de mortalidad de los incendios por año?
-
-###            Total de incendios con muertos/ Total de incendios. Se presenta en gráfico de barras.
+# Tasa de mortalidad de los incendios por año
 """
 
 # Convertimos las columnas a tipo numerico
@@ -345,15 +342,13 @@ tasa_mortalidad = round(((incendios_muertos / total_incendios)*100),2)
 tasa_mortalidad_df = pd.DataFrame({'YEAR': tasa_mortalidad.index, 'tasa de Mortalidad (%)': tasa_mortalidad.values})
 figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'})
 
-figm.show()
+st.plotly_chart(figm)
 
 """### Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
 
-# 5. ¿Cómo es la distribución de ocurrencia de incendios por día de la semana?  
+## Distribución de ocurrencia de incendios por día de la semana
 Gráfico de barras
 """
-
-incendios.columns
 
 import plotly.express as px
 
@@ -371,33 +366,28 @@ df_ocurrencia_incendios = pd.DataFrame({'Día de la semana': ocurrencia_incendio
 dias_semana_ordenados = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 df_ocurrencia_incendios['Día de la semana'] = pd.Categorical(df_ocurrencia_incendios['Día de la semana'], categories=dias_semana_ordenados, ordered=True)
 df_ocurrencia_incendios = df_ocurrencia_incendios.sort_values('Día de la semana')
-fig = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', )
-fig.show()
+figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', )
+st.plotly_chart(figS)
 
 """Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles.
 
-# 6. ¿Cuál es el número de incendios por localidad?
+## Número de incendios por localidad
 """
-
-CONS.columns
 
 incendios_por_localidad = CONS['GEO'].value_counts()
 df_incendios = pd.DataFrame({'Localidad': incendios_por_localidad.index, 'Número de Incendios': incendios_por_localidad.values})
 # Definir una lista de colores para las barras
 colores = ['Yellow', 'orange', 'red', 'purple', 'blue', 'green']  # Puedes agregar más colores si es necesario
 
-fig = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Número de Incendios por Localidad', color='Localidad', color_discrete_sequence=colores)
+figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Número de Incendios por Localidad', color='Localidad', color_discrete_sequence=colores)
 
-# Mostrar el gráfico
-fig.show()
+st.plotly_chart(figL)
 
 """Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número similar de eventos correspondiente a 4440.
 
-# 7. ¿Cuál es la distribución de los incendios (residenciales/no residenciales)?
-Se muestra en gráfico de torta para apreciar el comparativo.
+## Distribución de los incendios (residenciales/no residenciales)
 """
 
-DESA.columns
 #count_fire = DESA[DESA['EVENT SUBGROUP'] == 'fire']['EVENT SUBGROUP'].value_counts()
 #count_fire
 
@@ -415,15 +405,13 @@ cantidad_residenciales = len(residenciales)
 no_residenciales = DESA[DESA['EVENT TYPE'] == 'non-residential'][DESA['EVENT SUBGROUP'] != 'fire']
 cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
-fig = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
-fig.show()
+figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
+st.plotly_chart(figR)
 
 """Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.
 
-# 8. ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente los rociadores?  tasa de efectividad= Total de incendios apagados por rociadoress/total de incendios
+## Porcentaje de incendios en los que funcionaron efectivamente los rociadores
 """
-
-ROC.columns
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
 conteo_eventos
@@ -440,18 +428,16 @@ data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios
 
 df = pd.DataFrame(data)
 
-fig = px.pie(df, values='Cantidad', names='Resultado', title='Porcentaje de Efectividad de Rociadores')
-fig.show()
+figrr = px.pie(df, values='Cantidad', names='Resultado', title='Porcentaje de Efectividad de Rociadores')
+st.plotly_chart(figrr)
 
 print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
 
-"""# 9.  ¿Cuál es el porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo?
+"""## Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo?
  tasa de efectividad: Total de incendios donde la alrma funcionó/total de incendios
 """
 
 conteo_eventos = AH['performance_of_system'].value_counts()
-conteo_eventos
-
 conteo_performance = AH['performance_of_system'].value_counts()
 incendios_con_alarma = conteo_performance['Alarm activated']
 incendios_sin_alarma = total_incendios - incendios_con_alarma
@@ -459,8 +445,8 @@ data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [
 
 df = pd.DataFrame(data)
 
-fig = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectividad de Alarmas de Humo')
+figah = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectividad de Alarmas de Humo')
 
-fig.show()
+st.plotly_chart(figah)
 
 """### El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""

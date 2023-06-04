@@ -272,7 +272,7 @@ st.image(image, caption="Tomado de: https://www.istockphoto.com/es/foto/incendio
 #1
 ###
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
-st.markdown("<h6 style='text-align: center; color: #525252;'>El desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las *tormentas* y en tercer lugar los incendios, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesanteindagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.</h6>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: #525252;'>El desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las tormentas y en tercer lugar los incendios, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesanteindagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.</h6>", unsafe_allow_html=True)
 
 desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})

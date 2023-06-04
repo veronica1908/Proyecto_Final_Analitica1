@@ -257,8 +257,11 @@ st.markdown("<h6 style='text-align: center; color: #50668a;'>Semestre: 2023-2</h
 
 st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canadá: Énfasis en los incendios, ¿Podemos hacer algo para controlarlos?</h1>", unsafe_allow_html=True)
 
+
 #INICIAMOS EL DESARROLLO DE LAS PREGUNTAS, PRESENTÁNDOLO COMO RESPUESTAS INFORMATIVAS EN STREAMLIT
+
 #1
+###
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
 st.markdown("<h6 style='text-align: center; color: #525252;'>El desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las *tormentas* y en tercer lugar los incendios, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesanteindagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.</h6>", unsafe_allow_html=True)
 
@@ -287,9 +290,8 @@ df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de
 fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
 st.plotly_chart(fig)
 
-
-"""Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente
-las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos.</h2>", unsafe_allow_html=True)
 
 #3
 st.markdown("<h2 style='text-align: center; color: #930000;'>Costo promedio de la normalización por tipo de desastre</h2>", unsafe_allow_html=True)
@@ -312,8 +314,9 @@ figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento':
 
 st.plotly_chart(figC)
 
-"""Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.</h2>", unsafe_allow_html=True)
+            
 #4
 st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios con respecto al resto de desastres</h2>", unsafe_allow_html=True)
 
@@ -334,8 +337,8 @@ data = pd.DataFrame({'Tipo de Desastre': ['Incendios', 'Otros Desastres'], 'Porc
 figPP = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
 st.plotly_chart(figPP)
 
-"""Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que el 8.97% del total de desastres están dados por incendios, lo cual es un número importante si se tiene en cuenta que dentro de la base hay 32 tipos de desastres en total, y que una distribución promedio sería de 3,1% para cada desastre.</h2>", unsafe_allow_html=True)
 
 #5
 st.markdown("<h2 style='text-align: center; color: #930000;'>Cantidad de incendios por año</h2>", unsafe_allow_html=True)
@@ -351,9 +354,10 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 data.plot( 'Año' , 'Cantidad de Incendios' )
 
-"""Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
-Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios.
+Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.</h2>", unsafe_allow_html=True)
+            
 #6
 st.markdown("<h2 style='text-align: center; color: #930000;'>Tasa de mortalidad de los incendios por año</h2>", unsafe_allow_html=True)
 
@@ -373,8 +377,9 @@ figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={
 
 st.plotly_chart(figm)
 
-"""Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.</h2>", unsafe_allow_html=True)
+
 
 #7
 st.markdown("<h2 style='text-align: center; color: #930000;'>Distribución de ocurrencia de incendios por día de la semana</h2>", unsafe_allow_html=True)
@@ -398,7 +403,8 @@ df_ocurrencia_incendios = df_ocurrencia_incendios.sort_values('Día de la semana
 figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', )
 st.plotly_chart(figS)
 
-"""Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles."""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que hay mayor incidencia de incendios el Lunes, seguido del Martes y luego el Miércoles.</h2>", unsafe_allow_html=True)
 
 #8
 
@@ -414,8 +420,9 @@ figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Núm
 
 st.plotly_chart(figL)
 
-"""Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número similar de eventos correspondiente a 4440.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que extrañamente la localidad de Canadá es la única con datos diferentes al resto de localidades, las cuales tienen un número similar de eventos correspondiente a 4440.</h2>", unsafe_allow_html=True)
+
 
 #9
 st.markdown("<h2 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h2>", unsafe_allow_html=True)
@@ -437,8 +444,8 @@ df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenci
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
 st.plotly_chart(figR)
 
-"""Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.
-"""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incndios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h2>", unsafe_allow_html=True)
 
 #10
 st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h2>", unsafe_allow_html=True)
@@ -467,8 +474,6 @@ print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectivid
 
 st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h2>", unsafe_allow_html=True)
 
-
-
 conteo_eventos = AH['performance_of_system'].value_counts()
 conteo_performance = AH['performance_of_system'].value_counts()
 incendios_con_alarma = conteo_performance['Alarm activated']
@@ -481,4 +486,5 @@ figah = px.pie(df, values='Cantidad', names='Resultado', title='Tasa de Efectivi
 
 st.plotly_chart(figah)
 
-""" El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%."""
+###
+st.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h2>", unsafe_allow_html=True)

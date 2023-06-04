@@ -236,7 +236,7 @@ DESA = DESA.drop('EVENT START DATE', axis=1)
 Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González"""
 """Semestre: 2023-2"""
 
-st.title(Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios)
+st.title("Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios")
 
 
 

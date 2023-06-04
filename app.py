@@ -460,7 +460,21 @@ cantidad_residenciales = len(residenciales)
 no_residenciales = DESA[DESA['EVENT TYPE'] == 'non-residential'][DESA['EVENT SUBGROUP'] != 'fire']
 cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
-figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio', title='Distribución de Incendios Residenciales y No Residenciales')
+
+figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio',
+               width=370, height=370)
+
+figR.update_layout(template = 'simple_white',
+                  paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  legend=dict(orientation="h",
+                              yanchor="bottom",
+                              y=-0.4,
+                              xanchor="center",
+                              x=0.5))
+
+
+
 c4.plotly_chart(figR)
 
 ###
@@ -483,8 +497,23 @@ data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios
 
 df = pd.DataFrame(data)
 
-figrr = px.pie(df, values='Cantidad', names='Resultado', title='Porcentaje de Efectividad de Rociadores')
+figrr = px.pie(df, values='Cantidad', names='Resultado',
+               width=370, height=370)
+
+figrr.update_layout(template = 'simple_white',
+                  paper_bgcolor='rgba(0,0,0,0)',
+                  plot_bgcolor='rgba(0,0,0,0)',
+                  legend=dict(orientation="h",
+                              yanchor="bottom",
+                              y=-0.4,
+                              xanchor="center",
+                              x=0.5))
+
+
+
+
 c5.plotly_chart(figrr)
+
 
 print("El porcentaje de efectividad de los rociadores es:", porcentaje_efectividad)
 

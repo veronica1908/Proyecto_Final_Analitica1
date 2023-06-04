@@ -243,9 +243,8 @@ st.plotly_chart(figd)
 
 """ ### El desastre de mayor ocurrencia es el de *inundaciones*, en segundo lugar las *tormentas* y en tercer lugar los *incendios*, por lo tanto, hacer énfases en el tipo de desastres de incendios vale la pena, ya que está en el top 3 de ocurrencia, sin embargo, sería interesante indagar sobre algunos datos de las inundaciones y de las tormentas, aunque estos tipos de desastres, tienen menos posibilidades de ser controlados.
 
-
-# **Finalmente, se revisa la cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
 """
+# **La cantidad de muertes generadas por estos tres principales tipos de desastre para tener un comparativo de ocurrencia versus impactos.**
 
 eventos = ['fire', 'storm', 'flood']
 filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
@@ -260,7 +259,7 @@ st.plotly_chart(fig)
 las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos."""
 
 
-"""1. ¿Cuál es el costo promedio de la normalización por tipo de desastre ?"""
+"""## Costo promedio de la normalización por tipo de desastre"""
 
 import pandas as pd
 import numpy as np
@@ -270,17 +269,14 @@ DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace('.', '')
 DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
 
-#Calculamos ahora si el costo promedio por tipo de desastre, teniendo en cuenta solo los valores no nulos y los ordenamos ascendentemente
-costo_promedio = DESA.groupby('EVENT TYPE')['NORMALIZED TOTAL COST'].mean()
-costo_promedio_ordenado = costo_promedio.sort_values(ascending=False)
+eventosC = ['fire', 'storm', 'flood']
+filtroC = DESA['EVENT TYPE'].isin(eventosC)
+datos_filtradosC = DESA[filtroC]
+costo = datos_filtradosC.groupby('EVENT TYPE')['NORMALIZED TOTAL COST'].mean().reset_index()
+df_costos = pd.DataFrame({'Tipo de evento': costo['EVENT TYPE'], 'Costo': costo['NORMALIZED TOTAL COST']})
+figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento': 'Tipo de evento', 'Costo': 'Costo'},title='costo por tipo de evento')
 
-# Como da un número tan grande, entonces formateamos el costo promedio en formato alargado y sin decimales con símbolo de dólar y separador de miles para que se entienda mejor
-costo_promedio_formateado = costo_promedio_ordenado.apply(lambda x: "${:,.0f}".format(x))
-
-# Crear una tabla a partir del costo promedio ordenado y formateado para que se pueda visualizar mejor
-#tabla_costo_promedio = pd.DataFrame({'EVENT TYPE': costo_promedio_ordenado.index, 'Costo Promedio': costo_promedio_formateado}).reset_index()
-tabla_costo_promedio = pd.DataFrame({'Costo Promedio': costo_promedio_formateado}).reset_index()
-tabla_costo_promedio
+st.plotly_chart(figC)
 
 """Se tiene que los desastres que implican mayores costos para la normalización están grandemente marcados en un top 6 con respecto al resto de desastres, en primer lugar están los terremotos dada su naturaleza y poder de afectación estructural con costo promedio de 84,126,702,800,000. En segundo lugar están los incendios de todo tipo, que claramente pueden acabar con todo a su paso si no es controlado y cuyo costo es inferior al 50% del costo de los terremotos, estando en $39,595,179,216,216, luego están las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente. Despúes están los ciclones y desastres por aire. En séptimo lugar ya se ubican otros tipos de desastres cuya diferencia en costos de normalización es notablemente inferior con respecto a este top seis descrito aquí.
 

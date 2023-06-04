@@ -260,7 +260,7 @@ st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canad√
 # AGREGAMOS UINA IMAGEN
 image= "incendiosCanada.jpg"
 
-st.image(image, caption=None, width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+st.image(image, caption="Tomado de: https://www.istockphoto.com/es/foto/incendios-de-lytton-bc-gm1326687341-411303646", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
 
 #INICIAMOS EL DESARROLLO DE LAS PREGUNTAS, PRESENT√ÅNDOLO COMO RESPUESTAS INFORMATIVAS EN STREAMLIT

@@ -231,7 +231,18 @@ DESA['MONTH'] = DESA['MONTH'].apply(lambda x: calendar.month_abbr[x] if x != 0 e
 DESA = DESA.drop('EVENT START DATE', axis=1)
 
 
-""" # Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios"""
+""" ###FACULTAD DE INGENIERÍA / DEPARTAMENTO DE INGENIERÍA INDUSTRIAL / INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS
+Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González
+Semestre: 2023-2
+
+
+# Desastres en Canadá: Incidencia de los desastres en la cotidianidad, un énfasis sobre los incendios
+
+
+
+
+
+"""
 
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
 

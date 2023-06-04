@@ -22,10 +22,14 @@ Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morale
 """
 
 #Carga de las librerias necesarias para la ejecución del código
+import streamlit as st
 import pandas as pd
-import numpy as np
+import pydeck as pdk #Mapas avanzados
 import plotly.express as px
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import base64
+import numpy as np
 
 ###Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 

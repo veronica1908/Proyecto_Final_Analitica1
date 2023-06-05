@@ -443,8 +443,8 @@ st.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que extr
 
 #----------------------------------------
 #9
-c4, c5, c6= st.columns((1,1,1))
-c4.markdown("<h5 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h5>", unsafe_allow_html=True)
+
+st.markdown("<h5 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h5>", unsafe_allow_html=True)
 
 #count_fire = DESA[DESA['EVENT SUBGROUP'] == 'fire']['EVENT SUBGROUP'].value_counts()
 #count_fire
@@ -475,13 +475,16 @@ figR.update_layout(template = 'simple_white',
 
 
 
-c4.plotly_chart(figR)
+st.plotly_chart(figR)
 
 ###
-c4.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incendios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h6>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incendios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h6>", unsafe_allow_html=True)
 
 #10
-c5.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)
+
+c4, c5= st.columns((1,1))
+
+c4.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
 
@@ -512,17 +515,17 @@ figrr.update_layout(template = 'simple_white',
 
 
 
-c5.plotly_chart(figrr)
+c4.plotly_chart(figrr)
 
 
 ###
-c5.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
+c4.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
 
 
 
 #11
 
-c6.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h5>", unsafe_allow_html=True)
+c5.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h5>", unsafe_allow_html=True)
 
 conteo_eventos = AH['performance_of_system'].value_counts()
 conteo_performance = AH['performance_of_system'].value_counts()
@@ -545,7 +548,7 @@ figah.update_layout(template = 'simple_white',
                               x=0.5))
 
 #enviar a streamlit
-c6.plotly_chart(figah)
+c5.plotly_chart(figah)
 
 ###
-c6.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
+c5.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)

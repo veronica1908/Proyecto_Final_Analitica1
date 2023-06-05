@@ -46,8 +46,6 @@ st.markdown("<h1 style='text-align: center; color: #0066FF; font-family: system-
 st.markdown("<h3 style='text-align: center; color: #666666;'>Comparativo entre aspersores y alarmas de humo</h2>", unsafe_allow_html=True)
 
 
-=======
-
 
 #Realizamos pruebas para verificar que haya conexión a la base de datos
 AH  = pd.read_csv('https://www.4minds.solutions/tarea/final/BDALARMAHUMO.csv', sep=';',  low_memory=False) #Base de datos de Alarmas de Humo

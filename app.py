@@ -254,11 +254,10 @@ st.markdown("<h6 style='text-align: center; color: #50668a;'>Semestre: 2023-1</h
 
 #AGREGAMOS IMAGEN BANDERA DE CANADÁ PREVIO AL TITULO
 imageB= "Bandera.jpg"
-
 st.image(imageB, caption=None, width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 #AGREGAMOS EL TÍTULO DEL TRABAJO
-st.markdown("<h1 style='text-align: center; color: #840901;'>Desastres en Canadá: Énfasis en los incendios, ¿Podemos hacer algo para controlarlos?</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #840901;'>Eficacia de los sistemas de incendio en Canadá - Comparativo entre sistemas para apagado de incendios: Aspersores vs alarmas de humo</h1>", unsafe_allow_html=True)
 
 #INICIAMOS EL DESARROLLO DE LAS PREGUNTAS, PRESENTÁNDOLO COMO RESPUESTAS INFORMATIVAS EN STREAMLIT
 

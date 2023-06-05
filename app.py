@@ -462,7 +462,7 @@ cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
 
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio',
-               width=280, height=280)
+               width=400, height=400)
 
 figR.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',

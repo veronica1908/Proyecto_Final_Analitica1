@@ -41,12 +41,6 @@ st.set_page_config(layout="wide")
 ###Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 
 
-# Título principal, h1 denota el estilo del título 1
-st.markdown("<h1 style='text-align: center; color: #0066FF; font-family: system-ui; margin-top: 20px;'>Eficacia de los sistemas de incendio en Canadá</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: #666666;'>Comparativo entre aspersores y alarmas de humo</h2>", unsafe_allow_html=True)
-
-
-
 #Realizamos pruebas para verificar que haya conexión a la base de datos
 AH  = pd.read_csv('https://www.4minds.solutions/tarea/final/BDALARMAHUMO.csv', sep=';',  low_memory=False) #Base de datos de Alarmas de Humo
 MOR = pd.read_csv('https://www.4minds.solutions/tarea/final/BDMORTALIDAD.csv', sep=';',  low_memory=False) #Base de datos de Mortalidad
@@ -271,7 +265,7 @@ imageB= "Bandera.jpg"
 st.image(imageB, caption=None, width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 #AGREGAMOS EL TÍTULO DEL TRABAJO
-st.markdown("<h1 style='text-align: center; color: #840901;'>Eficacia de los sistemas de incendio en Canadá - Comparativo entre sistemas para apagado de incendios: Aspersores vs alarmas de humo</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #840901;'>Eficacia de los sistemas contra incendios en Canadá: Aspersores vs alarmas de humo</h1>", unsafe_allow_html=True)
 
 #INICIAMOS EL DESARROLLO DE LAS PREGUNTAS, PRESENTÁNDOLO COMO RESPUESTAS INFORMATIVAS EN STREAMLIT
 

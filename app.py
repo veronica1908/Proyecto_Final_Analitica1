@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-st.set_page_config(layout="wide")
+
 
 """Morales,_Moreno,_Lemus_Trabajo_Final_Segunda_Entrega_Analítica_1 (2).ipynb
 
@@ -33,6 +33,9 @@ from plotly.subplots import make_subplots
 import base64
 import numpy as np
 
+
+#ancho página
+st.set_page_config(layout="wide")
 ###Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 
 #Realizamos pruebas para verificar que haya conexión a la base de datos

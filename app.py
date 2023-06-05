@@ -40,7 +40,7 @@ import numpy as np
 st.set_page_config(layout="wide")
 ###Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 
-<<<<<<< patch-1
+
 # Título principal, h1 denota el estilo del título 1
 st.markdown("<h1 style='text-align: center; color: #0066FF; font-family: system-ui; margin-top: 20px;'>Eficacia de los sistemas de incendio en Canadá</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #666666;'>Comparativo entre aspersores y alarmas de humo</h2>", unsafe_allow_html=True)

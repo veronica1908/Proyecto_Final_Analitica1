@@ -574,7 +574,7 @@ c14.plotly_chart(figrr)
 c14.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
 
 imageROC= "rociador.jpg"
-c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=400, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 
 
@@ -611,4 +611,4 @@ c15.plotly_chart(figah)
 c15.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
 
 imageAH= "alarmahumo.jpg"
-c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=150, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=400, use_column_width=None, clamp=False, channels="RGB", output_format="auto")

@@ -312,7 +312,7 @@ datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
 
 muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
 df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
-fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento', width=400, height=400)
+fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'}', width=400, height=400)
 c1.plotly_chart(fig)
 
 ###
@@ -326,7 +326,7 @@ muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES']
 
 
 # Generar gráfica
-fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=700, height=450, title="Evolución de muertes causadas por tipo de evento")
+fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=700, height=450)
 # Editar gráfica
 fig.update_layout(
         title_x=0.5,

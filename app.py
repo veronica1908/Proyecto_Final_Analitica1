@@ -22,9 +22,11 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import base64
 import numpy as np
+import geopy
+from geopy.geocoders import Nominatim
 
-#Hemos montado los archivos de la base de datos a un hosting para poder trabajar los 3. Modificamos los permisos y se puede acceder a los datos desde cualquier lugar, de esta manera cualquier usuario puede ejecutar la BD desde cualquier parte."""
 
+#BASES DE DATOS CRUDAS
 AH  = pd.read_csv('https://www.4minds.solutions/tarea/final/BDALARMAHUMO.csv', sep=';',  low_memory=False) #Base de datos de Alarmas de Humo
 MOR = pd.read_csv('https://www.4minds.solutions/tarea/final/BDMORTALIDAD.csv', sep=';',  low_memory=False) #Base de datos de Mortalidad
 ROC = pd.read_csv('https://www.4minds.solutions/tarea/final/BDROCIADORES.csv', sep=';',  low_memory=False) #Base de datos de Rociadores
@@ -34,17 +36,16 @@ DES = pd.read_csv('https://www.4minds.solutions/tarea/final/BDGENERALDESASTRES.c
 DESA = pd.read_csv('https://www.4minds.solutions/tarea/final/DESA.csv', sep=';',  low_memory=False) #Base de datos de Desastres en general
 CONS = pd.read_csv('https://www.4minds.solutions/tarea/final/CONS.csv', sep=';',  low_memory=False) #Base de datos de Desastres en general
 
-#INICIAMOS CON LOS ENCABEZADOS
+
 st.set_page_config(layout="wide")
 
+#ENCABEZADO DEL TRABAJO Y EQUIPO
 st.markdown("<h5 style='text-align: center; color: #666666; font-family:helvetica;'>UNIVERSIDAD DE ANTIOQUIA <br> FACULTAD DE INGENIERÍA <br> DEPARTAMENTO DE INGENIERÍA INDUSTRIAL <br> INTRODUCCIÓN A LA ANALÍTICA DE NEGOCIOS</h5>", unsafe_allow_html=True)
-
 st.markdown("<h6 style='text-align: center; color: #666666; font-family: helvetica;'>Equipo de trabajo: Aura Luz Moreno Díaz, Marcelo Lemus, Verónica Andrea Morales González</h6>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: #666666; font-family: helvetica;'>Semestre: 2023-1</h6>", unsafe_allow_html=True)
 
-# Ruta de la imagen
+#IMAGEN DECORATIVA
 image_path = "Bandera.jpg"
-
 html_code = f"""
 <div style="display: flex; justify-content: center;">
     <img src="data:image/jpeg;base64,{base64.b64encode(open(image_path, "rb").read()).decode()}" width=100px>
@@ -52,88 +53,128 @@ html_code = f"""
 """
 st.markdown(html_code, unsafe_allow_html=True)
 
-# Título principal, h1 denota el estilo del título 1
+# TITULO PRINCIPAL
 st.markdown("<h1 style='text-align: center; color: #990000; font-family: helvetica; margin-top: 20px;'>Eficacia de los sistemas de incendio en Canadá</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #666666; font-family: helvetica;'>Comparativo entre aspersores y alarmas de humo</h3>", unsafe_allow_html=True)
 
-#1
-###
 #Abstract
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Este trabajo de investigación examina la eficacia de los sistemas de prevención de incendios en Canadá, centrándose específicamente en los detectores de humo y los sistemas de rociadores en incidentes de incendios estructurales. El estudio comienza proporcionando una visión general del número total de desastres, incluyendo varios tipos, que han ocurrido en Canadá, según se informa en las bases de datos abiertas disponibles. A partir de ahí, el análisis se reduce para explorar los tipos específicos de incidentes de incendios, específicamente incendios forestales e incendios estructurales. Finalmente, la investigación se enfoca aún más en evaluar la eficacia de los sistemas de rociadores y detectores de humo en la mitigación de los daños causados por los incendios estructurales..</h6>", unsafe_allow_html=True)
 
+#     1
+
 #VISIÓN GENERAL DE DESASTRES EN CANADA
+
 st.markdown("<h4 style='text-align: left; color: #990000; font-family: helvetica;'>Visión general de los desastres ocurridos en Canadá desde 1900 hasta 2022</h4>", unsafe_allow_html=True)
 
-#GRAFICA GENERAL DE DESASTRES
+#GRAFICA DE BARRAS  GENERAL DE DESASTRES
 desastre = DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
 figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'})
-
 st.plotly_chart(figd, use_container_width=True)
 
 #EXPLICACIÓN
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Existe una amplia variedad de tipos de desastres, pero al observar la frecuencia de ocurrencia, se destaca que las inundaciones son el tipo de desastre más común, seguido de las tormentas y, en tercer lugar, los incendios. Por lo tanto, es pertinente poner énfasis en estos tipos de desastres debido a su relevancia en términos de frecuencia.</h6>", unsafe_allow_html=True)
 
+
+
+#SECCIÓN DE LOS TOP 3 DE MUERTES POR DESASTRE
 st.markdown("<hr>", unsafe_allow_html=True)
-
-#----------------------------------------
-c1, c2, c3 = st.columns((1,1,1)) # Dividir el ancho en  columnas de igual tamaño
-
+st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica;'>Top 3 de Muertes por desastre</h6>", unsafe_allow_html=True)
+c1, c2, c3 = st.columns((1,1,1)) 
 
 #--------------- Top inundaciones
-c1.markdown("<h3 style='text-align: left; color: gray;'> Top inundaciones </h3>", unsafe_allow_html=True)
+c1.markdown("<h3 style='text-align: left; color: gray;'> INUNDACIONES </h3>", unsafe_allow_html=True)
 
-# Eliminar los espacios en blanco del campo 'Flood'
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
-
-# Filtrar los datos por el tipo de evento 'flood'
 filtro_inundaciones = DESA['EVENT TYPE'] == 'flood'
 datos_inundaciones = DESA[filtro_inundaciones]
-
-# Limpiar los datos eliminando los valores 'SIN'
 datos_limpios = datos_inundaciones[datos_inundaciones['FATALITIES'] != 'SIN']
-
-# Convertir la columna 'FATALITIES' a tipo numérico
 datos_limpios['FATALITIES'] = pd.to_numeric(datos_limpios['FATALITIES'])
-
-# Calcular el número total de muertes por inundaciones
 muertes_inundaciones = datos_limpios['FATALITIES'].sum()
+c1.text("Total: {}".format(muertes_inundaciones))
 
-# Mostrar el resultado en Streamlit
-c1.text("Inundaciones: {}".format(muertes_inundaciones))
-
-
-#--------------- Top inundaciones
-c2.markdown("<h3 style='text-align: left; color: gray;'> Top Tormentas </h3>", unsafe_allow_html=True)
+#--------------- Top Tormentas
+c2.markdown("<h3 style='text-align: left; color: gray;'> TORMENTAS </h3>", unsafe_allow_html=True)
 
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
 filtro_tormentas = DESA['EVENT TYPE'] == 'storm'
 datos_tormentas = DESA[filtro_tormentas]
-
 datos_limpios_tormentas = datos_tormentas[datos_tormentas['FATALITIES'] != 'SIN']
 datos_limpios_tormentas['FATALITIES'] = pd.to_numeric(datos_limpios_tormentas['FATALITIES'])
-
 muertes_tormentas = datos_limpios_tormentas['FATALITIES'].sum()
-
-# Mostrar el resultado en Streamlit
-c2.text("Tormentas: {}".format(muertes_tormentas))
-
+c2.text("Total: {}".format(muertes_tormentas))
 
 #--------------- Top incendios
-c3.markdown("<h3 style='text-align: left; color: gray;'> Top Incendios </h3>", unsafe_allow_html=True)
+c3.markdown("<h3 style='text-align: left; color: gray;'> INCENDIOS </h3>", unsafe_allow_html=True)
 
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
 filtro_incendios = DESA['EVENT TYPE'] == 'fire'
 datos_incendios = DESA[filtro_incendios]
-
 datos_limpios_incendios = datos_incendios[datos_incendios['FATALITIES'] != 'SIN']
 datos_limpios_incendios['FATALITIES'] = pd.to_numeric(datos_limpios_incendios['FATALITIES'])
-
 muertes_incendios = datos_limpios_incendios['FATALITIES'].sum()
+c3.text("Total: {}".format(muertes_incendios))
 
-c3.text("Incendios: {}".format(muertes_incendios))
+
+
+st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Como podemos ver, la tasa de mortalidad la encabezan las tormentas con 1.725 muertes. Este tipo de tormentas incluyen las tormentas de nieve que son comunes en Canadá y se agravan por ser el segundo país más frío del mundo. En segundo lugar están los incendios, que incluyen los estructurales (o de construcciones humanas) y los forestales con  388 muertes y finalmente las inundaciones.</h6>", unsafe_allow_html=True)
+
 
 st.markdown("<hr>", unsafe_allow_html=True)
+
+
+#TOP 3 DE PÉRDIDAS ECONÓMICAS POR DESASTRE
+st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica;'>Top 3 de pérdidas económicas por desastre</h6>", unsafe_allow_html=True)
+
+pe1, pe2, pe3 = st.columns((1,1,1)) # Dividir el ancho en  columnas de igual tamaño
+
+
+#--------------- Top inundaciones
+pe1.markdown("<h3 style='text-align: left; color: gray;'> INUNDACIONES </h3>", unsafe_allow_html=True)
+
+
+DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
+pe1_filtro_inundaciones = DESA['EVENT TYPE'] == 'flood'
+pe1_datos_inundaciones = DESA[pe1_filtro_inundaciones]
+pe1_datos_limpios = pe1_datos_inundaciones[pe1_datos_inundaciones['ESTIMATED TOTAL COST'] != 'SIN']
+pe1_datos_limpios['ESTIMATED TOTAL COST'] = pd.to_numeric(pe1_datos_limpios['ESTIMATED TOTAL COST'])
+pe1_perdidas_economicas = pe1_datos_limpios['ESTIMATED TOTAL COST'].sum()
+pe1_perdidas_formateadas = "${:,.2f}".format(pe1_perdidas_economicas)
+pe1.text("Total: {}".format(pe1_perdidas_formateadas))
+
+
+
+#--------------- Top tormentas
+pe2.markdown("<h3 style='text-align: left; color: gray;'> TORMENTAS </h3>", unsafe_allow_html=True)
+
+
+DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
+pe2_filtro_tormentas = DESA['EVENT TYPE'] == 'storm'
+pe2_datos_tormentas = DESA[pe2_filtro_tormentas]
+pe2_datos_limpios = pe2_datos_tormentas[pe2_datos_tormentas['ESTIMATED TOTAL COST'] != 'SIN']
+pe2_datos_limpios['ESTIMATED TOTAL COST'] = pd.to_numeric(pe2_datos_limpios['ESTIMATED TOTAL COST'])
+pe2_perdidas_economicas = pe2_datos_limpios['ESTIMATED TOTAL COST'].sum()
+pe2_perdidas_formateadas = "${:,.2f}".format(pe2_perdidas_economicas)
+pe2.text("Total: {}".format(pe2_perdidas_formateadas))
+
+
+#--------------- Top incendios
+pe3.markdown("<h3 style='text-align: left; color: gray;'> INCENDIOS </h3>", unsafe_allow_html=True)
+
+
+DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
+pe3_filtro_incendios = DESA['EVENT TYPE'] == 'fire'
+pe3_datos_incendios = DESA[pe3_filtro_incendios]
+pe3_datos_limpios = pe3_datos_incendios[pe3_datos_incendios['ESTIMATED TOTAL COST'] != 'SIN']
+pe3_datos_limpios['ESTIMATED TOTAL COST'] = pd.to_numeric(pe3_datos_limpios['ESTIMATED TOTAL COST'])
+pe3_perdidas_economicas = pe3_datos_limpios['ESTIMATED TOTAL COST'].sum()
+pe3_perdidas_formateadas = "${:,.2f}".format(pe3_perdidas_economicas)
+pe3.text("Total: {}".format(pe3_perdidas_formateadas))
+
+st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>En este caso podemos observar las tormentas como las mayores generadoras de pérdidas, en segundo lugar las inundaciones y finalmente los incendios ya que las pérdidas ecológicas no tienen una escala económica cuantificable y solo se toman las pérdidas en incendios estructurales.</h6>", unsafe_allow_html=True)
+
+st.markdown("<hr>", unsafe_allow_html=True)
+
 
 #Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
 st.markdown("<h4 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h4>", unsafe_allow_html=True)

@@ -468,7 +468,7 @@ df_ocurrencia_incendios = pd.DataFrame({'Día de la semana': ocurrencia_incendio
 dias_semana_ordenados = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 df_ocurrencia_incendios['Día de la semana'] = pd.Categorical(df_ocurrencia_incendios['Día de la semana'], categories=dias_semana_ordenados, ordered=True)
 df_ocurrencia_incendios = df_ocurrencia_incendios.sort_values('Día de la semana')
-figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', width=500, height=400 )
+figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana', width=500, height=400 )
 c9.plotly_chart(figS)
 
 ###
@@ -484,7 +484,7 @@ df_incendios = pd.DataFrame({'Localidad': incendios_por_localidad.index, 'Númer
 # Definir una lista de colores para las barras
 colores = ['Yellow', 'orange', 'red', 'purple', 'blue', 'green']  # Puedes agregar más colores si es necesario
 
-figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Número de Incendios por Localidad', color='Localidad', color_discrete_sequence=colores, width=500, height=400)
+figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', color='Localidad', color_discrete_sequence=colores, width=500, height=400)
 
 c10.plotly_chart(figL)
 

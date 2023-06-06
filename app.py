@@ -471,14 +471,14 @@ df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenci
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio',
                width=400, height=400)
 
-figR.update_layout(template = 'simple_white',
+figR.update_layout(template = 'simple_black',
                   paper_bgcolor='rgba(0,0,0,0)',
                   plot_bgcolor='rgba(0,0,0,0)',
                   legend=dict(orientation="h",
                               yanchor="bottom",
-                              y=1.4,
+                              y=-0.4,
                               xanchor="center",
-                              x=1.5))
+                              x=0.5))
 
 
 

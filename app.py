@@ -376,7 +376,7 @@ muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES']
 
 
 # Generar gráfica
-fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evoluion de muertes causadas por tipo de evento")
+fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evolución de muertes causadas por tipo de evento")
 # Editar gráfica
 fig.update_layout(
         title_x=0.5,
@@ -408,7 +408,7 @@ st.markdown("<h2 style='text-align: center; color: #930000;'>Costo promedio de l
 import pandas as pd
 import numpy as np
 
-#Convertimos a tipo string y removemos separador de miles y la convertimos a tipo numerico haciendo coerción en los errores para que los valores no numéricos se conviertan en NaN.
+#Convertimos a tipo string y removemos separador de miles y la convertimos a tipo numérico haciendo coerción en los errores para que los valores no numéricos se conviertan en NaN.
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace('.', '')
 DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
@@ -464,13 +464,24 @@ cantidad_incendios_por_año = incendios['YEAR'].value_counts().sort_index()
 
 data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Incendios': cantidad_incendios_por_año.values})
 
-data.plot( 'Año' , 'Cantidad de Incendios' )
-
 figin = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=1000, height=450, title="Cantidad de incendios por año")
 
 st.plotly_chart(figin)
 
 
+---------------------
+st.markdown("<h2 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h2>", unsafe_allow_html=True)
+ 
+
+
+muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+
+
+# Generar gráfica
+fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evolución de muertes causadas por tipo de evento")
+
+
+--------------------
 
 ###
 st.markdown("<h6 style='text-align: center; color: #525252;'>Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios. Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.</h2>", unsafe_allow_html=True)

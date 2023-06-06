@@ -276,7 +276,7 @@ st.markdown("<h6 style='text-align: center; color: #525252;'>Existe una gran can
 
 desastre=DESA['EVENT TYPE'].value_counts()
 desastre_df = pd.DataFrame({'EVENT TYPE': desastre.index, 'Cantidad desastres': desastre.values})
-figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'}, width=400, height=400))
+figd = px.bar(desastre_df, x='EVENT TYPE', y='Cantidad desastres', labels={'EVENT TYPE': 'Tipo de desastre', 'desastre_df': 'Tipo de desastre'}, width=400, height=400)
 
 
 st.plotly_chart(figd)

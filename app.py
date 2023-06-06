@@ -466,7 +466,7 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 data.plot( 'Año' , 'Cantidad de Incendios' )
 
-figin = px.line(mcantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=1000, height=450, title="Cantidad de incendios por año")
+figin = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=1000, height=450, title="Cantidad de incendios por año")
 # Editar gráfica
 figin.update_layout(
         title_x=0.5,

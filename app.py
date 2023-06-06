@@ -464,9 +464,6 @@ cantidad_incendios_por_año = incendios['YEAR'].value_counts().sort_index()
 
 data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Incendios': cantidad_incendios_por_año.values})
 
-figin = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=1000, height=450, title="Cantidad de incendios por año")
-
-st.plotly_chart(figin)
 
 
 ###

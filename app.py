@@ -420,7 +420,7 @@ cantidad_incendios_por_año = incendios['YEAR'].value_counts().sort_index()
 data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Incendios': cantidad_incendios_por_año.values})
 # Generar gráfica
 
-figinc = px.line(cantidad_incendios_por_añ, x='Año', y='Cantidad de Incendios', width=650, height=450)
+figinc = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=650, height=450)
 # Editar gráfica
 figinc.update_layout(
         title_x=0.5,
@@ -440,6 +440,7 @@ figinc.update_layout(
 c4.plotly_chart(figinc)
 
 
+##fig.show()
 
 ###
 c7.markdown("<h6 style='text-align: center; color: #525252;'>Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios. Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.</h2>", unsafe_allow_html=True)

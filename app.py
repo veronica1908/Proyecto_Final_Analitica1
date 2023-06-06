@@ -526,7 +526,7 @@ c11.plotly_chart(figR)
 
 ##AGREGAMOS IMAGENES TIPO INCENDIO
 imageIC= "incendioCASA.jpg"
-c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=430, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=400, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 imageIF= "incendioFORESTAL.jpg"
 c13.image(imageIF, caption="Incendio forestal. Tomado de: https://media.istockphoto.com/id/1273568227/es/foto/helic%C3%B3ptero-de-lucha-contra-incendios-lleva-cubo-de-agua-para-extinguir-el-incendio-forestal.jpg?s=612x612&w=0&k=20&c=3wtyO95GI_hWT4JzFxi72Zt41ZR737hFHXJXGjkwe3o=", width=350, use_column_width=None, clamp=False, channels="RGB", output_format="auto")

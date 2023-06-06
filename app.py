@@ -77,10 +77,50 @@ st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace
 
 
 
+
+
+st.markdown("<hr>", unsafe_allow_html=True)
+
+
+st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Teniendo en cuenta el top 3 en ocurrencias y fatalidades, presentamos un gráfico de torta para ver la relación entre las tres según el número de fatalidades.</h6>", unsafe_allow_html=True)
+
+
+#GRAFICO DE CANTIDAD DE MUERTES POR EVENTO TOP 3
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace('.', '')
+DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
+eventos = ['fire', 'storm', 'flood']
+filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
+datos_filtrados = DESA[filtro_eventos]
+datos_filtrados['FATALITIES'] = pd.to_numeric(datos_filtrados['FATALITIES'], errors='coerce')
+datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
+muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
+df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
+fig = px.pie(df_muertes, values='Cantidad de muertes', names='Tipo de evento', 
+             labels={'Cantidad de muertes': 'Cantidad de muertes', 'Tipo de evento': 'Tipo de evento'},
+             title='Cantidad de muertes por tipo de evento')
+st.plotly_chart(fig)
+
+
+
+
 #SECCIÓN DE LOS TOP 3 DE MUERTES POR DESASTRE
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica;'>Top 3 de Muertes por desastre</h6>", unsafe_allow_html=True)
-c1, c2, c3 = st.columns((1,1,1)) 
+
+im2, im3, im1 = st.columns((1,1,1)) 
+
+im1_image= "inundaciones.jpg"
+im1.image(im1_image, width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+
+im2_image= "tormentas.jpg"
+im2.image(im2_image, width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+
+im3_image= "incendiosCanada.jpg"
+im3.image(im3_image,width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+
+
+c2, c3, c1 = st.columns((1,1,1)) 
 
 #--------------- Top inundaciones
 c1.markdown("<h3 style='text-align: left; color: gray;'> INUNDACIONES </h3>", unsafe_allow_html=True)
@@ -123,10 +163,31 @@ st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace
 st.markdown("<hr>", unsafe_allow_html=True)
 
 
+
+
 #TOP 3 DE PÉRDIDAS ECONÓMICAS POR DESASTRE
 st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica;'>Top 3 de pérdidas económicas por desastre</h6>", unsafe_allow_html=True)
 
-pe1, pe2, pe3 = st.columns((1,1,1)) # Dividir el ancho en  columnas de igual tamaño
+
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace(',', '')
+DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
+eventos = ['fire', 'storm', 'flood']
+filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
+datos_filtrados = DESA[filtro_eventos]
+datos_filtrados = datos_filtrados.dropna(subset=['NORMALIZED TOTAL COST'])
+costos = datos_filtrados.groupby('EVENT TYPE')['NORMALIZED TOTAL COST'].sum().reset_index()
+df_costos = pd.DataFrame({'Tipo de evento': costos['EVENT TYPE'], 'Costo económico': costos['NORMALIZED TOTAL COST']})
+fig = px.pie(df_costos, values='Costo económico', names='Tipo de evento',
+             labels={'Costo económico': 'Costo económico', 'Tipo de evento': 'Tipo de evento'},
+             title='Costo económico por tipo de evento')
+
+st.plotly_chart(fig)
+
+
+
+
+pe2, pe1, pe3 = st.columns((1,1,1)) # Dividir el ancho en  columnas de igual tamaño
 
 
 #--------------- Top inundaciones

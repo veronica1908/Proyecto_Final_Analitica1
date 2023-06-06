@@ -478,17 +478,15 @@ c14, c15= st.columns((1,1))
 
 c14.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)
 
-conteo_eventos = ROC['performance_of_system'].value_counts()
 
+
+ROC=ROC.rename(columns={'Performance of sprinkler system, structural fires':'performance_of_system'})
 conteo_performance = ROC['performance_of_system'].value_counts()
 incendios_con_rociadores = conteo_performance['Sprinkler operated']
 total_incendios = ROC.shape[0]
 porcentaje_efectividad = (incendios_con_rociadores / total_incendios) * 100
-
-conteo_performance = ROC['performance_of_system'].value_counts()
-incendios_con_rociadores = conteo_performance['Sprinkler operated']
 incendios_sin_rociadores = total_incendios - incendios_con_rociadores
-data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios_con_rociadores, incendios_sin_rociadores]}
+data = {'Resultado': ['Si funcionarón', 'No funcionarón'],'Cantidad': [incendios_con_rociadores, incendios_sin_rociadores]}
 
 df = pd.DataFrame(data)
 
@@ -504,12 +502,9 @@ figrr.update_layout(template = 'simple_white',
                               xanchor="center",
                               x=0.5))
 
-
-
-
 c14.plotly_chart(figrr)
 ###
-c14.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
+c14.markdown("<h6 style='text-align: left; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
 
 imageROC= "rociador.jpg"
 c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=470, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
@@ -522,14 +517,17 @@ c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.co
 
 c15.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h5>", unsafe_allow_html=True)
 
-conteo_eventos = AH['performance_of_system'].value_counts()
+#st.write(AH)
+#st.write(AH.columns)
+#conteo_eventos = AH['performance_of_system'].value_counts()
+AH=AH.rename(columns={'Performance of smoke alarm device, residential fires':'performance_of_system'})
 conteo_performance = AH['performance_of_system'].value_counts()
 incendios_con_alarma = conteo_performance['Alarm activated']
 incendios_sin_alarma = total_incendios - incendios_con_alarma
 data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [incendios_con_alarma, incendios_sin_alarma]}
 
 df = pd.DataFrame(data)
-
+st.write(df)
 figah = px.pie(df, values='Cantidad', names='Resultado',
                width=350, height=300)
 
@@ -546,7 +544,9 @@ figah.update_layout(template = 'simple_white',
 c15.plotly_chart(figah)
 
 ###
-c15.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
+c15.markdown("<h6 style='text-align: left; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
 
 imageAH= "alarmahumo.jpg"
 c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=500, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+
+st.markdown("<h1 style='text-align: center; color: #525252;'>MUCHAS GRACIAS</h1>", unsafe_allow_html=True)

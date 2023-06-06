@@ -449,7 +449,7 @@ c8.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que la t
 
 
 #7
-c9, c10 st.columns((1,1))
+c9, c10= st.columns((1,1))
 c9.markdown("<h4 style='text-align: center; color: #930000;'>Distribución de ocurrencia de incendios por día de la semana</h4>", unsafe_allow_html=True)
 
 import plotly.express as px

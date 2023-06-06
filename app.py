@@ -526,7 +526,7 @@ c11.plotly_chart(figR)
 
 ##AGREGAMOS IMAGENES TIPO INCENDIO
 imageIC= "incendioCASA.jpg"
-c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=450, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=430, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 imageIF= "incendioFORESTAL.jpg"
 c13.image(imageIF, caption="Incendio forestal. Tomado de: https://media.istockphoto.com/id/1273568227/es/foto/helic%C3%B3ptero-de-lucha-contra-incendios-lleva-cubo-de-agua-para-extinguir-el-incendio-forestal.jpg?s=612x612&w=0&k=20&c=3wtyO95GI_hWT4JzFxi72Zt41ZR737hFHXJXGjkwe3o=", width=350, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
@@ -574,7 +574,7 @@ c14.plotly_chart(figrr)
 c14.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
 
 imageROC= "rociador.jpg"
-c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=500, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=470, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 
 
@@ -611,4 +611,4 @@ c15.plotly_chart(figah)
 c15.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
 
 imageAH= "alarmahumo.jpg"
-c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=530, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=500, use_column_width=None, clamp=False, channels="RGB", output_format="auto")

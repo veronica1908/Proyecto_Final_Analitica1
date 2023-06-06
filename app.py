@@ -524,7 +524,7 @@ figR.update_layout(template = 'simple_white',
 
 c11.plotly_chart(figR)
 
-AGREGAMOS IMAGENES TIPO INCENDIO
+##AGREGAMOS IMAGENES TIPO INCENDIO
 imageIC= "incendioCASA.jpg"
 c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 

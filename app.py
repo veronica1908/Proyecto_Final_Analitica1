@@ -272,7 +272,7 @@ st.markdown("<h1 style='text-align: center; color: #840901;'>Eficacia de los sis
 #1
 
 #Se revisa a nivel general, cómo es la distribución de la cantidad de desastres por cada tipo y cuál es el que tiene mayor ocurrencia en el periodo.
-c1.markdown("<h6 style='text-align: center; color: #525252;'>Existe una gran cantidad de tipos de desastres, cuando se mira por la cantidad de ocurrencias, se tiene que el desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las tormentas y en tercer lugar los incendios, por lo tanto hacer énfases en estos tipos de desastres vale la pena.</h6>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: #525252;'>Existe una gran cantidad de tipos de desastres, cuando se mira por la cantidad de ocurrencias, se tiene que el desastre de mayor ocurrencia es el de inundaciones, en segundo lugar las tormentas y en tercer lugar los incendios, por lo tanto hacer énfases en estos tipos de desastres vale la pena.</h6>", unsafe_allow_html=True)
 
 
 c1, c2= st.columns((1,1))

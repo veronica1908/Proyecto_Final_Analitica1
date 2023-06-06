@@ -476,9 +476,9 @@ figR.update_layout(template = 'simple_white',
                   plot_bgcolor='rgba(0,0,0,0)',
                   legend=dict(orientation="h",
                               yanchor="bottom",
-                              y=-0.4,
+                              y=1.4,
                               xanchor="center",
-                              x=0.5))
+                              x=1.5))
 
 
 

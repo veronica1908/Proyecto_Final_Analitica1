@@ -420,7 +420,7 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 # Generar gráfica
 
-figinc = px.line(cantidad_incendios_por_añ, x='Año', y='Cantidad de Incendios', width=650, height=450)
+figinc = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=650, height=450)
 # Editar gráfica
 figinc.update_layout(
         title_x=0.5,

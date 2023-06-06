@@ -331,7 +331,6 @@ muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES']
 fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=650, height=450)
 # Editar gráfica
 fig.update_layout(
-        title_x=0.5,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         template = 'simple_white',

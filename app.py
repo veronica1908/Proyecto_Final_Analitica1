@@ -54,16 +54,19 @@ html_code = f"""
 st.markdown(html_code, unsafe_allow_html=True)
 
 # TITULO PRINCIPAL
-st.markdown("<h1 style='text-align: center; color: #990000; font-family: helvetica; margin-top: 20px;'>Eficacia de los sistemas de incendio en Canadá</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #990000; font-family: helvetica; margin-top: 20px;'>Eficacia de los sistemas de incendio 🔥 en Canadá 🍁</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #666666; font-family: helvetica;'>Comparativo entre aspersores y alarmas de humo</h3>", unsafe_allow_html=True)
 
 #Abstract
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Este trabajo de investigación examina la eficacia de los sistemas de prevención de incendios en Canadá, centrándose específicamente en los detectores de humo y los sistemas de rociadores en incidentes de incendios estructurales. El estudio comienza proporcionando una visión general del número total de desastres, incluyendo varios tipos, que han ocurrido en Canadá, según se informa en las bases de datos abiertas disponibles. A partir de ahí, el análisis se reduce para explorar los tipos específicos de incidentes de incendios, específicamente incendios forestales e incendios estructurales. Finalmente, la investigación se enfoca aún más en evaluar la eficacia de los sistemas de rociadores y detectores de humo en la mitigación de los daños causados por los incendios estructurales..</h6>", unsafe_allow_html=True)
 
-#     1
+
+
+
+
+#     1  
 
 #VISIÓN GENERAL DE DESASTRES EN CANADA
-
 st.markdown("<h4 style='text-align: left; color: #990000; font-family: helvetica;'>Visión general de los desastres ocurridos en Canadá desde 1900 hasta 2022</h4>", unsafe_allow_html=True)
 
 #GRAFICA DE BARRAS  GENERAL DE DESASTRES
@@ -76,14 +79,9 @@ st.plotly_chart(figd, use_container_width=True)
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Existe una amplia variedad de tipos de desastres, pero al observar la frecuencia de ocurrencia, se destaca que las inundaciones son el tipo de desastre más común, seguido de las tormentas y, en tercer lugar, los incendios. Por lo tanto, es pertinente poner énfasis en estos tipos de desastres debido a su relevancia en términos de frecuencia.</h6>", unsafe_allow_html=True)
 
 
-
-
-
+# TOP 3 DE OCURRENCIAS POR FATALIDAD
 st.markdown("<hr>", unsafe_allow_html=True)
-
-
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Teniendo en cuenta el top 3 en ocurrencias y fatalidades, presentamos un gráfico de torta para ver la relación entre las tres según el número de fatalidades.</h6>", unsafe_allow_html=True)
-
 
 #GRAFICO DE CANTIDAD DE MUERTES POR EVENTO TOP 3
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
@@ -96,13 +94,28 @@ datos_filtrados['FATALITIES'] = pd.to_numeric(datos_filtrados['FATALITIES'], err
 datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
 muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
 df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
+
 fig = px.pie(df_muertes, values='Cantidad de muertes', names='Tipo de evento', 
              labels={'Cantidad de muertes': 'Cantidad de muertes', 'Tipo de evento': 'Tipo de evento'},
              title='Cantidad de muertes por tipo de evento')
-st.plotly_chart(fig)
 
+container = st.container()
+with container:
+    st.plotly_chart(fig)
 
-
+container.markdown(
+    """
+    <style>
+    .stContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 #SECCIÓN DE LOS TOP 3 DE MUERTES POR DESASTRE
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -110,15 +123,15 @@ st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica
 
 im2, im3, im1 = st.columns((1,1,1)) 
 
+#--------------- Top inundaciones
 im1_image= "inundaciones.jpg"
 im1.image(im1_image, width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-
+#--------------- Top Tormentas
 im2_image= "tormentas.jpg"
 im2.image(im2_image, width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-
+#--------------- Top incendios
 im3_image= "incendiosCanada.jpg"
 im3.image(im3_image,width=200, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-
 
 c2, c3, c1 = st.columns((1,1,1)) 
 
@@ -155,19 +168,13 @@ datos_limpios_incendios['FATALITIES'] = pd.to_numeric(datos_limpios_incendios['F
 muertes_incendios = datos_limpios_incendios['FATALITIES'].sum()
 c3.text("Total: {}".format(muertes_incendios))
 
-
-
 st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Como podemos ver, la tasa de mortalidad la encabezan las tormentas con 1.725 muertes. Este tipo de tormentas incluyen las tormentas de nieve que son comunes en Canadá y se agravan por ser el segundo país más frío del mundo. En segundo lugar están los incendios, que incluyen los estructurales (o de construcciones humanas) y los forestales con  388 muertes y finalmente las inundaciones.</h6>", unsafe_allow_html=True)
-
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
 
-
-
-#TOP 3 DE PÉRDIDAS ECONÓMICAS POR DESASTRE
+#SECCIÓN DE LOS TOP 3 DE PERDIDAS POR DESASTRE
 st.markdown("<h6 style='text-align: left; color: #990000; font-family: helvetica;'>Top 3 de pérdidas económicas por desastre</h6>", unsafe_allow_html=True)
-
 
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace(',', '')
@@ -181,19 +188,13 @@ df_costos = pd.DataFrame({'Tipo de evento': costos['EVENT TYPE'], 'Costo económ
 fig = px.pie(df_costos, values='Costo económico', names='Tipo de evento',
              labels={'Costo económico': 'Costo económico', 'Tipo de evento': 'Tipo de evento'},
              title='Costo económico por tipo de evento')
-
 st.plotly_chart(fig)
-
-
-
 
 pe2, pe1, pe3 = st.columns((1,1,1)) # Dividir el ancho en  columnas de igual tamaño
 
 
 #--------------- Top inundaciones
 pe1.markdown("<h3 style='text-align: left; color: gray;'> INUNDACIONES </h3>", unsafe_allow_html=True)
-
-
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
 pe1_filtro_inundaciones = DESA['EVENT TYPE'] == 'flood'
 pe1_datos_inundaciones = DESA[pe1_filtro_inundaciones]
@@ -203,12 +204,8 @@ pe1_perdidas_economicas = pe1_datos_limpios['ESTIMATED TOTAL COST'].sum()
 pe1_perdidas_formateadas = "${:,.2f}".format(pe1_perdidas_economicas)
 pe1.text("Total: {}".format(pe1_perdidas_formateadas))
 
-
-
 #--------------- Top tormentas
 pe2.markdown("<h3 style='text-align: left; color: gray;'> TORMENTAS </h3>", unsafe_allow_html=True)
-
-
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
 pe2_filtro_tormentas = DESA['EVENT TYPE'] == 'storm'
 pe2_datos_tormentas = DESA[pe2_filtro_tormentas]
@@ -218,11 +215,8 @@ pe2_perdidas_economicas = pe2_datos_limpios['ESTIMATED TOTAL COST'].sum()
 pe2_perdidas_formateadas = "${:,.2f}".format(pe2_perdidas_economicas)
 pe2.text("Total: {}".format(pe2_perdidas_formateadas))
 
-
 #--------------- Top incendios
 pe3.markdown("<h3 style='text-align: left; color: gray;'> INCENDIOS </h3>", unsafe_allow_html=True)
-
-
 DESA['EVENT TYPE'] = DESA['EVENT TYPE'].str.strip()
 pe3_filtro_incendios = DESA['EVENT TYPE'] == 'fire'
 pe3_datos_incendios = DESA[pe3_filtro_incendios]
@@ -237,43 +231,30 @@ st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace
 st.markdown("<hr>", unsafe_allow_html=True)
 
 
-#Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
-st.markdown("<h4 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h4>", unsafe_allow_html=True)
+#EVOLUCIÓN EN EL TIEMPO DE LAS MUERTES
+st.markdown("<h2 style='text-align: center; color: #930000;'>Evolución en el tiempo de los desastres que más produjeron fatalidades</h2>", unsafe_allow_html=True)
  
-#muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+eventos = ['storm', 'fire', 'flood']
+datos_filtrados = DESA[DESA['EVENT TYPE'].isin(eventos)]
+datos_filtrados['FATALITIES'] = pd.to_numeric(datos_filtrados['FATALITIES'], errors='coerce')
+datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
+muertes_por_anio_evento = datos_filtrados.groupby(['YEAR', 'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+fig = px.line(muertes_por_anio_evento, x='YEAR', y='FATALITIES', color='EVENT TYPE',
+              title='Muertes por año según el tipo de evento')
+fig.update_layout(xaxis_title='Año', yaxis_title='Cantidad de muertes')
+st.plotly_chart(fig)
 
-# Generar gráfica
-#fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=650, height=450)
-# Editar gráfica
-#fig.update_layout(
-        #paper_bgcolor='rgba(0,0,0,0)',
-        #plot_bgcolor='rgba(0,0,0,0)',
-       # template = 'simple_white',
-       # xaxis_title="<b>Año<b>",
-       # yaxis_title='<b>Cantidad de incidentes<b>',
-       # legend_title_text='',
-        
-     #  legend=dict(
-      #      orientation="v",
-      #      yanchor="bottom",
-      #      y=1.02,
-      #      xanchor="right",
-      #      x=1.5))
-#c4.plotly_chart(fig)
+st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>En la gráfica se puede observar la evolución de la tasa de mortalidad conforme va pasando el tiempo y como esta va disminuyendo al pasar de los años ya que la atención prioritaria para emergencias tiene planes de acción rigurosos que se han pulido con el pasar de las décadas, disminuyendo la mortalidad.</h6>", unsafe_allow_html=True)
 
 
-# AGREGAMOS UNA IMAGEN
-imageT= "tormentas.jpg"
 
-st.image(imageT, caption="Tormentas. Tomado de: https://www.istockphoto.com/es/foto/tormenta-entrante-sobre-el-r%C3%ADo-bow-en-calgary-gm1327119477-411576407?phrase=tormentas%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
-#3
+
+#                  3
+
 st.markdown("<h2 style='text-align: center; color: #930000;'>Costo promedio de la normalización por tipo de desastre</h2>", unsafe_allow_html=True)
 
 c5, c6= st.columns((1,1))
-
-import pandas as pd
-import numpy as np
 
 #Convertimos a tipo string y removemos separador de miles y la convertimos a tipo numérico haciendo coerción en los errores para que los valores no numéricos se conviertan en NaN.
 DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
@@ -288,19 +269,13 @@ df_costos = pd.DataFrame({'Tipo de evento': costo['EVENT TYPE'], 'Costo': costo[
 figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento': 'Tipo de evento', 'Costo': 'Costo'},title='costo por tipo de evento', width=550, height=500)
 
 c5.plotly_chart(figC)
-
-###
-st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que el tipo de desastre que implica mayores costos para la normalización entre los tres definidos, es el desastre por incendio, ocupando a nivel general, el segundo lugar entre todos los tipos de desastres. Los incendios pueden acabar con todo a su paso si no son controlados y su costo promedio de normalización está en $39,595,179,216,216, luego están las tormentas que son incontrolables y las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente.</h2>", unsafe_allow_html=True)
-# AGREGAMOS UNA IMAGEN
+st.markdown("<h6 style='text-align: left; color: #525252; font-family: monospace;'>Se tiene que el tipo de desastre que implica mayores costos para la normalización entre los tres definidos, es el desastre por incendio, ocupando a nivel general, el segundo lugar entre todos los tipos de desastres. Los incendios pueden acabar con todo a su paso si no son controlados y su costo promedio de normalización está en $39,595,179,216,216, luego están las tormentas que son incontrolables y las inundaciones que pueden acabar también con  los enseres y estructuras muy fácilmente.</h2>", unsafe_allow_html=True)
 imagein= "incendio.jpg"
-
 c6.image(imagein, caption="Incendios. Tomado de: https://www.istockphoto.com/es/foto/bombero-de-retenci%C3%B3n-de-la-manguera-se%C3%B1alando-corriente-de-agua-en-fuego-gm157442677-9126810?phrase=incendio%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
             
+
 #4
 st.markdown("<h2 style='text-align: center; color: #930000;'>Porcentaje de incendios con respecto al resto de desastres</h2>", unsafe_allow_html=True)
-
-import plotly.express as px
-import pandas as pd
 
 #Calculamos el número de incendios y el número total de desastres
 num_incendios = DESA[DESA['EVENT TYPE'] == 'fire'].shape[0]
@@ -550,3 +525,38 @@ imageAH= "alarmahumo.jpg"
 c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=500, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 st.markdown("<h1 style='text-align: center; color: #525252;'>MUCHAS GRACIAS</h1>", unsafe_allow_html=True)
+
+#miremos esta bellecita
+
+# Filtrar los datos por muertes relacionadas con incendios
+filtro_incendios = MOR['Casualties'] == 'Fire-related deaths'
+muertes_incendios = MOR[filtro_incendios]
+
+# Agrupar por lugar (DGUID) y obtener la cantidad de muertes
+muertes_por_lugar = muertes_incendios.groupby('DGUID').size().reset_index(name='Deaths')
+
+# Crear el mapa
+st.pydeck_chart(pdk.Deck(
+    map_style='mapbox://styles/mapbox/light-v9',
+    initial_view_state=pdk.ViewState(
+        latitude=56.1304,
+        longitude=-106.3468,
+        zoom=3,
+        pitch=0,
+    ),
+    layers=[
+        pdk.Layer(
+            'ScatterplotLayer',
+            data=muertes_por_lugar,
+            get_position=['COORDINATE'],
+            get_radius=1000,
+            get_fill_color=[255, 0, 0, 255],
+            pickable=True,
+        ),
+    ],
+))
+
+ocurrencias_por_geo = MOR.groupby('GEO')['Casualties'].count().reset_index()
+
+# Mostrar la tabla en Streamlit
+st.table(ocurrencias_por_geo)

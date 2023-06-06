@@ -353,11 +353,9 @@ imageT= "tormentas.jpg"
 st.image(imageT, caption="Tormentas. Tomado de: https://www.istockphoto.com/es/foto/tormenta-entrante-sobre-el-r%C3%ADo-bow-en-calgary-gm1327119477-411576407?phrase=tormentas%20en%20canada", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
 #3
-
-c5, c6= st.columns((1,1))
-
 st.markdown("<h2 style='text-align: center; color: #930000;'>Costo promedio de la normalización por tipo de desastre</h2>", unsafe_allow_html=True)
 
+c5, c6= st.columns((1,1))
 
 import pandas as pd
 import numpy as np

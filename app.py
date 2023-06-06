@@ -422,7 +422,7 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 c7.markdown("<h6 style='text-align: center; color: #525252;'>Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios. Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.</h2>", unsafe_allow_html=True)
             
 #6
-c8.markdown("<h2 style='text-align: center; color: #930000;'>Tasa de mortalidad de los incendios por año</h2>", unsafe_allow_html=True)
+c8.markdown("<h4 style='text-align: center; color: #930000;'>Tasa de mortalidad de los incendios por año</h4>", unsafe_allow_html=True)
 
 # Convertimos las columnas a tipo numerico
 DESA['FATALITIES'] = pd.to_numeric(DESA['FATALITIES'], errors='coerce')
@@ -491,6 +491,7 @@ c10.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que ext
 #9
 
 st.markdown("<h5 style='text-align: center; color: #930000;'>Distribución de los incendios (residenciales/no residenciales)</h5>", unsafe_allow_html=True)
+c11, c12, c13= st.columns((1,1,1))
 
 #count_fire = DESA[DESA['EVENT SUBGROUP'] == 'fire']['EVENT SUBGROUP'].value_counts()
 #count_fire
@@ -521,16 +522,23 @@ figR.update_layout(template = 'simple_white',
 
 
 
-st.plotly_chart(figR)
+c11.plotly_chart(figR)
+
+AGREGAMOS IMAGENES TIPO INCENDIO
+imageIC= "incendioCASA.jpg"
+c12.image(imageIC, caption="Incendio residencial. Tomado de: https://media.istockphoto.com/id/1303309179/es/foto/fragmento-de-una-casa-de-ladrillo-blanco-sooty-que-est%C3%A1-en-llamas-con-llamas-y-humo-cming.jpg?s=612x612&w=0&k=20&c=rAqfrFaZOHV4LJv1_z0Tn6hAeH2oRVWT69bQ7KeI_d8=", width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+
+imageIF= "incendioFORESTAL.jpg"
+c13.image(imageIF, caption="Incendio forestal. Tomado de: https://media.istockphoto.com/id/1273568227/es/foto/helic%C3%B3ptero-de-lucha-contra-incendios-lleva-cubo-de-agua-para-extinguir-el-incendio-forestal.jpg?s=612x612&w=0&k=20&c=3wtyO95GI_hWT4JzFxi72Zt41ZR737hFHXJXGjkwe3o=", width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 ###
 st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que los incendios no residenciales son los que más se presentan con un 53.9% en comparación con los incendios residenciales.</h6>", unsafe_allow_html=True)
 
 #10
 
-c11, c12= st.columns((1,1))
+c14, c15= st.columns((1,1))
 
-c11.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)
+c14.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente los rociadores</h5>", unsafe_allow_html=True)
 
 conteo_eventos = ROC['performance_of_system'].value_counts()
 
@@ -561,17 +569,19 @@ figrr.update_layout(template = 'simple_white',
 
 
 
-c11.plotly_chart(figrr)
+c14.plotly_chart(figrr)
 
+imageROC= "rociador.jpg"
+c14.image(imageROC, caption="Rociadores. Tomado de: https://media.istockphoto.com/id/1016220060/es/foto/alarma-de-incendio-sistema-de-rociadores-en-acci%C3%B3n-con-humo.jpg?s=612x612&w=0&k=20&c=hErBxB7JBNuUltFiSuYHL0_sBs-OwuO6RABS4YzTfNQ=", width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
 ###
-c11.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
+c14.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de los rociadores es del 20%.</h6>", unsafe_allow_html=True)
 
 
 
 #11
 
-c12.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h5>", unsafe_allow_html=True)
+c15.markdown("<h5 style='text-align: center; color: #930000;'>Porcentaje de incendios en los que funcionaron efectivamente  las alarmas de humo</h5>", unsafe_allow_html=True)
 
 conteo_eventos = AH['performance_of_system'].value_counts()
 conteo_performance = AH['performance_of_system'].value_counts()
@@ -594,7 +604,10 @@ figah.update_layout(template = 'simple_white',
                               x=0.5))
 
 #enviar a streamlit
-c12.plotly_chart(figah)
+c15.plotly_chart(figah)
 
 ###
-c12.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
+c15.markdown("<h6 style='text-align: center; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
+
+imageAH= "alarmahumo.jpg"
+c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=100, use_column_width=None, clamp=False, channels="RGB", output_format="auto")

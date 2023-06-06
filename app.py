@@ -287,7 +287,59 @@ imageI= "inundaciones.jpg"
 st.image(imageI, caption="Inundaciones. Tomado de: https://media.istockphoto.com/id/1356603199/es/foto/inundaci%C3%B3n-y-humo-negro-del-fuego-en-la-ciudad-y-las-tierras-de-cultivo-despu%C3%A9s-de-la-tormenta.jpg?s=612x612&w=0&k=20&c=Ep9sSC__XJVVePWa1eXCU7fyVLGjb8qBZVO2nuZ1mGc=", width=None, use_column_width=150, clamp=False, channels="RGB", output_format="auto")
 
 
+st.markdown("<h2 style='text-align: center; color: #930000;'>Cantidad de muertes generadas por los tres principales tipos de desastre</h2>", unsafe_allow_html=True)
 
+
+import pandas as pd
+import numpy as np
+
+#Convertimos a tipo string y removemos separador de miles y la convertimos a tipo numerico haciendo coerción en los errores para que los valores no numéricos se conviertan en NaN.
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].astype(str)
+DESA['NORMALIZED TOTAL COST'] = DESA['NORMALIZED TOTAL COST'].str.replace('.', '')
+DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], errors='coerce')
+eventos = ['fire', 'storm', 'flood']
+filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
+datos_filtrados = DESA[filtro_eventos]
+
+# Convertir la columna 'FATALITIES' a valores numéricos
+datos_filtrados['FATALITIES'] = pd.to_numeric(datos_filtrados['FATALITIES'], errors='coerce')
+
+# Eliminar filas con valores no numéricos en 'FATALITIES'
+datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
+
+muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
+df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
+fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
+st.plotly_chart(fig)
+
+
+#Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
+st.markdown("<h2 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h2>", unsafe_allow_html=True)
+ 
+
+
+muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+
+
+# Generar gráfica
+fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evoluion de muertes causadas por tipo de evento")
+# Editar gráfica
+fig.update_layout(
+        title_x=0.5,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        template = 'simple_white',
+        xaxis_title="<b>Año<b>",
+        yaxis_title='<b>Cantidad de incidentes<b>',
+        legend_title_text='',
+        
+        legend=dict(
+            orientation="v",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1.5))
+st.plotly_chart(fig)
 #2
 st.markdown("<h2 style='text-align: center; color: #930000;'>Cantidad de muertes generadas por los tres principales tipos de desastre</h2>", unsafe_allow_html=True)
 
@@ -302,14 +354,47 @@ DESA['NORMALIZED TOTAL COST'] = pd.to_numeric(DESA['NORMALIZED TOTAL COST'], err
 eventos = ['fire', 'storm', 'flood']
 filtro_eventos = DESA['EVENT TYPE'].isin(eventos)
 datos_filtrados = DESA[filtro_eventos]
+
+# Convertir la columna 'FATALITIES' a valores numéricos
+datos_filtrados['FATALITIES'] = pd.to_numeric(datos_filtrados['FATALITIES'], errors='coerce')
+
+# Eliminar filas con valores no numéricos en 'FATALITIES'
+datos_filtrados = datos_filtrados.dropna(subset=['FATALITIES'])
+
 muertes = datos_filtrados.groupby('EVENT TYPE')['FATALITIES'].sum().reset_index()
 df_muertes = pd.DataFrame({'Tipo de evento': muertes['EVENT TYPE'], 'Cantidad de muertes': muertes['FATALITIES']})
 fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Tipo de evento': 'Tipo de evento', 'Cantidad de muertes': 'Cantidad de muertes'},title='Cantidad de muertes por tipo de evento')
 st.plotly_chart(fig)
 
 
-###
-st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene como resultado que las tormentas son las que tienen mayor número de muertes con 1725 casos, luego sigue incendios con 388 casos y finalmente las inundaciones a pesar de que tienen mayor ocurrencia como se vio anteriormente, tienen la menor cantidad de muertes en estos tres tipos de desastre con 124 casos.</h2>", unsafe_allow_html=True)
+#Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
+st.markdown("<h2 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h2>", unsafe_allow_html=True)
+ 
+
+
+muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+
+
+# Generar gráfica
+fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evoluion de muertes causadas por tipo de evento")
+# Editar gráfica
+fig.update_layout(
+        title_x=0.5,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        template = 'simple_white',
+        xaxis_title="<b>Año<b>",
+        yaxis_title='<b>Cantidad de incidentes<b>',
+        legend_title_text='',
+        
+        legend=dict(
+            orientation="v",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1.5))
+st.plotly_chart(fig)
+
 
 # AGREGAMOS UNA IMAGEN
 imageT= "tormentas.jpg"

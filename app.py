@@ -372,7 +372,7 @@ filtroC = DESA['EVENT TYPE'].isin(eventosC)
 datos_filtradosC = DESA[filtroC]
 costo = datos_filtradosC.groupby('EVENT TYPE')['NORMALIZED TOTAL COST'].mean().reset_index()
 df_costos = pd.DataFrame({'Tipo de evento': costo['EVENT TYPE'], 'Costo': costo['NORMALIZED TOTAL COST']})
-figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento': 'Tipo de evento', 'Costo': 'Costo'},title='costo por tipo de evento')
+figC = px.bar(df_costos, x='Tipo de evento', y='Costo',labels={'Tipo de evento': 'Tipo de evento', 'Costo': 'Costo'},title='costo por tipo de evento', width=500, height=400)
 
 c5.plotly_chart(figC)
 
@@ -400,7 +400,7 @@ porcentaje_no_incendios = 100 - porcentaje_incendios
 
 data = pd.DataFrame({'Tipo de Desastre': ['Incendios', 'Otros Desastres'], 'Porcentaje': [porcentaje_incendios, porcentaje_no_incendios]})
 
-figPP = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5)
+figPP = px.pie(data, values='Porcentaje', names='Tipo de Desastre', hole=0.5, width=500, height=400)
 st.plotly_chart(figPP)
 
 ###
@@ -440,7 +440,7 @@ incendios_muertos = incendios.groupby('YEAR')['FATALITIES'].count()
 #Ahora si calculamos la tasa de mortalidad y creamos el dataframe*1
 tasa_mortalidad = round(((incendios_muertos / total_incendios)*100),2)
 tasa_mortalidad_df = pd.DataFrame({'YEAR': tasa_mortalidad.index, 'tasa de Mortalidad (%)': tasa_mortalidad.values})
-figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'})
+figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'}, width=500, height=400)
 
 c8.plotly_chart(figm)
 
@@ -468,7 +468,7 @@ df_ocurrencia_incendios = pd.DataFrame({'Día de la semana': ocurrencia_incendio
 dias_semana_ordenados = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 df_ocurrencia_incendios['Día de la semana'] = pd.Categorical(df_ocurrencia_incendios['Día de la semana'], categories=dias_semana_ordenados, ordered=True)
 df_ocurrencia_incendios = df_ocurrencia_incendios.sort_values('Día de la semana')
-figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', )
+figS = px.bar(df_ocurrencia_incendios, x='Día de la semana', y='Ocurrencia', color='Día de la semana',title='Ocurrencia de Incendios por Día de la Semana', width=500, height=400 )
 c9.plotly_chart(figS)
 
 ###
@@ -484,7 +484,7 @@ df_incendios = pd.DataFrame({'Localidad': incendios_por_localidad.index, 'Númer
 # Definir una lista de colores para las barras
 colores = ['Yellow', 'orange', 'red', 'purple', 'blue', 'green']  # Puedes agregar más colores si es necesario
 
-figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Número de Incendios por Localidad', color='Localidad', color_discrete_sequence=colores)
+figL = px.bar(df_incendios, x='Localidad', y='Número de Incendios', title='Número de Incendios por Localidad', color='Localidad', color_discrete_sequence=colores, width=500, height=400)
 
 c10.plotly_chart(figL)
 
@@ -512,7 +512,7 @@ cantidad_no_residenciales = len(no_residenciales)
 df_incendios = pd.DataFrame({'Tipo de Incendio': ['Residenciales', 'No Residenciales'], 'Cantidad': [cantidad_residenciales, cantidad_no_residenciales]})
 
 figR = px.pie(df_incendios, values='Cantidad', names='Tipo de Incendio',
-               width=400, height=400)
+               width=500, height=400)
 
 figR.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',
@@ -551,7 +551,7 @@ data = {'Resultado': ['No funcionaron', 'Si funcionaron'],'Cantidad': [incendios
 df = pd.DataFrame(data)
 
 figrr = px.pie(df, values='Cantidad', names='Resultado',
-               width=280, height=280)
+               width=350, height=300)
 
 figrr.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',
@@ -586,7 +586,7 @@ data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [
 df = pd.DataFrame(data)
 
 figah = px.pie(df, values='Cantidad', names='Resultado',
-               width=280, height=280)
+               width=350, height=300)
 
 figah.update_layout(template = 'simple_white',
                   paper_bgcolor='rgba(0,0,0,0)',

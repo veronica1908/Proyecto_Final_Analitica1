@@ -313,37 +313,6 @@ fig = px.bar(df_muertes, x='Tipo de evento', y='Cantidad de muertes',labels={'Ti
 st.plotly_chart(fig)
 
 
-#Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
-st.markdown("<h2 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h2>", unsafe_allow_html=True)
- 
-
-
-muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
-
-
-# Generar gráfica
-fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=1000, height=450, title="Evoluion de muertes causadas por tipo de evento")
-# Editar gráfica
-fig.update_layout(
-        title_x=0.5,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        template = 'simple_white',
-        xaxis_title="<b>Año<b>",
-        yaxis_title='<b>Cantidad de incidentes<b>',
-        legend_title_text='',
-        
-        legend=dict(
-            orientation="v",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1.5))
-st.plotly_chart(fig)
-#2
-st.markdown("<h2 style='text-align: center; color: #930000;'>Cantidad de muertes generadas por los tres principales tipos de desastre</h2>", unsafe_allow_html=True)
-
-
 import pandas as pd
 import numpy as np
 

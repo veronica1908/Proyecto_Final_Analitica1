@@ -138,26 +138,26 @@ st.markdown("<hr>", unsafe_allow_html=True)
 #Ahora graficamos la evolucion de las muertes por año para cada tipo de desastre (top 3)
 st.markdown("<h4 style='text-align: center; color: #930000;'>Evolución de las muertes causadas por los tres tipos de desastres mas comunes</h4>", unsafe_allow_html=True)
  
-muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
+#muertes_por_anio = datos_filtrados.groupby(['YEAR' ,'EVENT TYPE'])['FATALITIES'].sum().reset_index()
 
 # Generar gráfica
-fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=650, height=450)
+#fig = px.line(muertes_por_anio, x='YEAR', y='FATALITIES', color = 'EVENT TYPE', width=650, height=450)
 # Editar gráfica
-fig.update_layout(
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        template = 'simple_white',
-        xaxis_title="<b>Año<b>",
-        yaxis_title='<b>Cantidad de incidentes<b>',
-        legend_title_text='',
+#fig.update_layout(
+        #paper_bgcolor='rgba(0,0,0,0)',
+        #plot_bgcolor='rgba(0,0,0,0)',
+       # template = 'simple_white',
+       # xaxis_title="<b>Año<b>",
+       # yaxis_title='<b>Cantidad de incidentes<b>',
+       # legend_title_text='',
         
-        legend=dict(
-            orientation="v",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1.5))
-c4.plotly_chart(fig)
+     #  legend=dict(
+      #      orientation="v",
+      #      yanchor="bottom",
+      #      y=1.02,
+      #      xanchor="right",
+      #      x=1.5))
+#c4.plotly_chart(fig)
 
 
 # AGREGAMOS UNA IMAGEN

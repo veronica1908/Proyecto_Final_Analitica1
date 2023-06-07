@@ -502,8 +502,8 @@ incendios_sin_alarma = total_incendios - incendios_con_alarma
 data = {'Resultado': ['Alarmas Activadas', 'Alarmas No Activadas'],'Cantidad': [incendios_con_alarma, incendios_sin_alarma]}
 
 df = pd.DataFrame(data)
-st.write(df)
-figah = px.pie(df, values='Cantidad', names='Resultado',
+#st.write(df)
+#figah = px.pie(df, values='Cantidad', names='Resultado',
                width=350, height=300)
 
 figah.update_layout(template = 'simple_white',

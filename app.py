@@ -515,8 +515,7 @@ figah.update_layout(template = 'simple_white',
                               xanchor="center",
                               x=0.5))
 
-#enviar a streamlit
-c15.plotly_chart(figah)
+
 
 ###
 c15.markdown("<h6 style='text-align: left; color: #525252;'>El porcentaje o tasa de efectividad  de funcionamiento de las alarmas de humo es del 20%.</h6>", unsafe_allow_html=True)
@@ -559,4 +558,4 @@ st.pydeck_chart(pdk.Deck(
 ocurrencias_por_geo = MOR.groupby('GEO')['Casualties'].count().reset_index()
 
 # Mostrar la tabla en Streamlit
-#st.table(ocurrencias_por_geo)
+st.table(ocurrencias_por_geo)

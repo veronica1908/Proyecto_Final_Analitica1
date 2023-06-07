@@ -297,7 +297,7 @@ st.markdown("<h6 style='text-align: center; color: #525252;'>Se tiene que el 8.9
 #5
 
 c7, c8= st.columns((1,1))
-#c7.markdown("<h4 style='text-align: center; color: #930000;'>Cantidad de incendios por año</h4>", unsafe_allow_html=True)
+c7.markdown("<h4 style='text-align: center; color: #930000;'>Cantidad de incendios por año</h4>", unsafe_allow_html=True)
 
 
 #Filtramos los registros que corresponden a incendios

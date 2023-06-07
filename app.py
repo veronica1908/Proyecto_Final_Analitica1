@@ -327,7 +327,7 @@ figinc.update_layout(
         y=1.02,
         xanchor="right",
         x=1.5))
-c4.plotly_chart(figinc)
+c7.plotly_chart(figinc)
 
 
 ###

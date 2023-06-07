@@ -310,28 +310,28 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 # Generar gráfica
 
-#figinc = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=650, height=450)
-# Editar gráfica
-#figinc.update_layout(
-       # title_x=0.5,
-       # paper_bgcolor='rgba(0,0,0,0)',
-      #  plot_bgcolor='rgba(0,0,0,0)',
-      #  template = 'simple_white',
-      #  xaxis_title="<b>Año<b>",
-      #  yaxis_title='<b>Cantidad de Incendios<b>',
-      #  legend_title_text='',
-        
-      #  legend=dict(
-       #     orientation="v",
-       #     yanchor="bottom",
-       #     y=1.02,
-       #     xanchor="right",
-       #     x=1.5))
-#c7.plotly_chart(figinc)
-###
+figinc = px.line(data, x='Año', y='Cantidad de Incendios', width=650, height=450, title="Cantidad de incendios por año")
 
-#c7.markdown("<h6 style='text-align: center; color: #525252;'>Puede observarse en el gráfico, que la mayor cantidad de incendios se han venido presentando en los últimos 40 años, ya que entre los años 1900 y 1980 se presentaron solo 15 incendios, mientras que después de 1980 y hasta el 2020, se presentaron 115 incendios. Esto también se puede presentar cuando no existe información disponible o bien se empezó a tomar oficialmente después de un año en particular, cuando ya se tenía establecido todo el sistema para prevención de desastres.</h2>", unsafe_allow_html=True)
-            
+#Editar gráfica
+figinc.update_layout(
+       title_x=0.5,
+       paper_bgcolor='rgba(0,0,0,0)',
+      plot_bgcolor='rgba(0,0,0,0)',
+      template = 'simple_white',
+      xaxis_title="<b>Año<b>",
+      yaxis_title='<b>Cantidad de Incendios<b>',
+      legend_title_text='',
+        
+      legend=dict(
+       orientation="v",
+       yanchor="bottom",
+       y=1.02,
+       xanchor="right",
+       x=1.5))
+c7.plotly_chart(figinc)  
+
+
+
 #6
 c8.markdown("<h4 style='text-align: center; color: #930000;'>Tasa de mortalidad de los incendios por año</h4>", unsafe_allow_html=True)
 
@@ -347,12 +347,32 @@ incendios_muertos = incendios.groupby('YEAR')['FATALITIES'].count()
 #Ahora si calculamos la tasa de mortalidad y creamos el dataframe*1
 tasa_mortalidad = round(((incendios_muertos / total_incendios)*100),2)
 tasa_mortalidad_df = pd.DataFrame({'YEAR': tasa_mortalidad.index, 'tasa de Mortalidad (%)': tasa_mortalidad.values})
-figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'}, width=500, height=400)
+#figm = px.bar(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', labels={'Año': 'Año', 'tasa_mortalidad_df': 'tasa de Mortalidad (%)'}, width=500, height=400)
+figm = px.line(tasa_mortalidad_df, x='YEAR', y='tasa de Mortalidad (%)', width=600, height=400, title="Tasa de mortalidad por año")
 
+               #Editar gráfica
+figm.update_layout(
+       title_x=0.5,
+       paper_bgcolor='rgba(0,0,0,0)',
+      plot_bgcolor='rgba(0,0,0,0)',
+      template = 'simple_white',
+      xaxis_title="<b>Año<b>",
+      yaxis_title='<b>Mortalidad (%)<b>',
+      legend_title_text='',
+        
+      legend=dict(
+       orientation="v",
+       yanchor="bottom",
+       y=1.02,
+       xanchor="right",
+       x=1.5))
+ 
 c8.plotly_chart(figm)
 
 ###
 c8.markdown("<h6 style='text-align: center; color: #525252;'>Se observa que la tasa de mortalidad en generales alta en los incendios ocurridos durante 1900 y 1998, sin embargo, para los 22 años siguientes,  la mortalidad en cada evento varió entre el 20% y el 100%.</h2>", unsafe_allow_html=True)
+
+
 
 
 #7

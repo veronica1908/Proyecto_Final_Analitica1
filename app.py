@@ -310,24 +310,24 @@ data = pd.DataFrame({'Año': cantidad_incendios_por_año.index, 'Cantidad de Inc
 
 # Generar gráfica
 
-#figinc = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=650, height=450)
-# Editar gráfica
-#figinc.update_layout(
-       # title_x=0.5,
-       # paper_bgcolor='rgba(0,0,0,0)',
-      #  plot_bgcolor='rgba(0,0,0,0)',
-      #  template = 'simple_white',
-      #  xaxis_title="<b>Año<b>",
-      #  yaxis_title='<b>Cantidad de Incendios<b>',
-      #  legend_title_text='',
+figinc = px.line(cantidad_incendios_por_año, x='Año', y='Cantidad de Incendios', width=650, height=450)
+Editar gráfica
+figinc.update_layout(
+       title_x=0.5,
+       paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        template = 'simple_white',
+        xaxis_title="<b>Año<b>",
+        yaxis_title='<b>Cantidad de Incendios<b>',
+        legend_title_text='',
         
-      #  legend=dict(
-       #     orientation="v",
-       #     yanchor="bottom",
-       #     y=1.02,
-       #     xanchor="right",
-       #     x=1.5))
-#c4.plotly_chart(figinc)
+        legend=dict(
+        orientation="v",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1.5))
+c4.plotly_chart(figinc)
 
 
 ###

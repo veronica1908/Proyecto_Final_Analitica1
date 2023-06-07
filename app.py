@@ -523,7 +523,8 @@ c15.markdown("<h6 style='text-align: left; color: #525252;'>El porcentaje o tasa
 imageAH= "alarmahumo.jpg"
 c15.image(imageAH, caption="Alarma de humo. Tomado de: https://media.istockphoto.com/id/1332514392/es/foto/detector-de-humo-y-alarma-contra-incendios-en-el-fondo-de-acci%C3%B3n.jpg?s=612x612&w=0&k=20&c=PRkBl_EFCHHO0LArDQE4cDs6CkCm_saix-YW9yyfmtE=", width=500, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
 
-
+#enviar a streamlit
+c15.plotly_chart(figah)
 
 #miremos esta bellecita
 
@@ -558,4 +559,4 @@ st.pydeck_chart(pdk.Deck(
 ocurrencias_por_geo = MOR.groupby('GEO')['Casualties'].count().reset_index()
 
 # Mostrar la tabla en Streamlit
-st.table(ocurrencias_por_geo)
+#st.table(ocurrencias_por_geo)
